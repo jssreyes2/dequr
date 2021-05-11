@@ -28,7 +28,7 @@
                     </div>
                     <div class="row" id="loading" style="display: none">
                         <div class="col-12 text-center">
-                            <img src='{{asset('asset/backend/img/loadingfrm.gif')}}'/>
+                            <img src="{{asset('asset/backend/img/loadingfrm.gif')}}"/>
                         </div>
                     </div>
 
