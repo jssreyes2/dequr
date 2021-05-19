@@ -5,8 +5,9 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
+use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\RegistersUsers;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
@@ -75,12 +76,20 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return App\Models\User;
      */
-    protected function create(array $data)
+    protected function create(Request $request)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
+
+        $user = User::where('email', '=', $request->email)->first();
+
+        if ($user instanceof User) {
+            return response()->json(['status' => 'fail', 'alert' => 'Los datos ya se encuentran registrado']);
+        }
+
+        $request->merge(['rol_id' => User::ROL_USERNAME, 'user_status' => true]);
+
+        $user=User::saveUser($request);
+         Auth::loginUsingId($user->id);
+
+        return response()->json(['status' => 'success', 'alert' => env('MSJ_SUCCESS')]);
     }
 }

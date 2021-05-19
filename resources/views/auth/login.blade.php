@@ -15,7 +15,7 @@
                     <a href="#" class="social-twitter"><img src="{{ asset('asset/frontend/assets/img/icons/twitter.svg')}}" alt="twitter"> Continuar con Twitter</a>
                 </div>
                 <div class="box-login">
-                    <form id="login" action="">
+                    <form role="form" id='form_login' name='form_login'>
                         <div class="wrap-input">
                             <label>Correo electrónico</label>
                             <input type="email" id="email" name="email" class="required email">
@@ -24,7 +24,9 @@
                             <label>Contraseña</label>
                             <input type="password" id="password" name="password" class="required">
                         </div>
-                        <p class="error-message">Datos incorrectos</p>  <!-- Añadir clase "active" para mostrar -->
+
+                        <img src='{{asset('asset/backend/img/loadingfrm.gif')}}' id='loading' style='display: none; margin: auto;'/>
+
                         <div class="buttons">
                             <button type="submit" class="btn-login btn-form">Iniciar sesión</button>
                             <a href="#" class="recover-password">¿Olvidó su contraseña?</a>
@@ -39,43 +41,45 @@
 
 @section('script')
     <script type="text/javascript">
-        $("body").on('submit', '#login', function (event) {
-
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
+        $("body").on('submit', '#form_login', function (event) {
 
             event.preventDefault()
-            if ($('#login').valid()) {
+            if ($('#form_login').valid()) {
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
 
                 $('#loading').show();
-                $('.btn-form').attr('disabled', true);
+                $('.btn-login').attr('disabled', true);
 
-                var email = $("input[name='email']").val();
-                var password = $("input[name='password']").val();
+                var formData = new FormData(document.getElementById("form_login"));
+
                 $.ajax({
                     type: "POST",
-                    url: "{{ route('login_user') }}",
-                    dataType: "json",
-                    data: {
-                        email: email,
-                        password: password
-                    },
+                    url: "{{route('login_user')}}",
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    dataType: 'json',
+                    data: formData,
                     success: function (respuesta) {
 
-                        if (respuesta.exito == 1) {
-                            window.location.href = "{{ route('backend') }}";
+                        $('#loading').hide();
+
+                        if (respuesta.status == 'success') {
+                            window.location.href = "{{route('PostComplaint.index')}}";
                         }
-                        if (respuesta.error == 1) {
-                            $('#loading').hide();
-                            toastr.options.timeOut = 2000;
-                            toastr.error('Error los datos son incorrectos');
-                            setTimeout(function () {
-                                $('.btn-form').attr('disabled', false);
-                            }, 2000);
+
+                        if (respuesta.status == 'fail') {
+                            showAlert(respuesta.message, respuesta.status);
                         }
+
+                        setTimeout(function () {
+                            $('.btn-login').attr('disabled', false);
+                        }, 2000);
                     }
                 });
             }

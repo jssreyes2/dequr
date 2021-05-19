@@ -15,15 +15,24 @@
                     <a href="#" class="social-twitter"><img src="{{ asset('asset/frontend/assets/img/icons/twitter.svg')}}" alt="twitter"> Continuar con Twitter</a>
                 </div>
                 <div class="box-register">
-                    <form action="#">
+                    <form role="form" id='form_register' name='form_register'>
+
                         <div class="wrap-input">
+                            <label>Nombres</label>
+                            <input type="text" name="firstname" id="firstname" class="required" maxlength="50" autocomplete="false">
+
+                            <label>Apellidos</label>
+                            <input type="text" name="lastname" id="lastname" class="required" maxlength="50" autocomplete="false">
+
                             <label>Correo electrónico</label>
-                            <input type="email" name="" id="">
-                        </div>
-                        <div class="wrap-input">
+                            <input type="email" name="email" id="email" class="required email">
+
                             <label>Contraseña</label>
-                            <input type="password" name="" id="">
+                            <input type="password" name="password" id="password" class="required">
                         </div>
+
+                        <img src='{{asset('asset/backend/img/loadingfrm.gif')}}' id='loading' style='display: none; margin: auto;'/>
+
                         <div class="buttons">
                             <button type="submit" class="btn-register">Regístrate</button>
                             <div class="accept-terms">
@@ -41,43 +50,42 @@
 
 @section('script')
     <script type="text/javascript">
-        $("body").on('submit', '#login', function (event) {
-
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
+        $("body").on('submit', '#form_register', function (event) {
 
             event.preventDefault()
-            if ($('#login').valid()) {
+            if ($('#form_register').valid()) {
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
 
                 $('#loading').show();
-                $('.btn-form').attr('disabled', true);
+                $('.btn-register').attr('disabled', true);
 
-                var email = $("input[name='email']").val();
-                var password = $("input[name='password']").val();
+                var formData = new FormData(document.getElementById("form_register"));
+
                 $.ajax({
                     type: "POST",
-                    url: "{{ route('login_user') }}",
-                    dataType: "json",
-                    data: {
-                        email: email,
-                        password: password
-                    },
+                    url: "{{route('register.create')}}",
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    dataType: 'json',
+                    data: formData,
                     success: function (respuesta) {
 
-                        if (respuesta.exito == 1) {
-                            window.location.href = "{{ route('backend') }}";
+                        $('#loading').hide();
+                        showAlert(respuesta.alert, respuesta.status);
+
+                        if (respuesta.status == 'success') {
+                            window.location.href = "{{route('PostComplaint.index')}}";
                         }
-                        if (respuesta.error == 1) {
-                            $('#loading').hide();
-                            toastr.options.timeOut = 2000;
-                            toastr.error('Error los datos son incorrectos');
-                            setTimeout(function () {
-                                $('.btn-form').attr('disabled', false);
-                            }, 2000);
-                        }
+
+                        setTimeout(function () {
+                            $('.btn-register').attr('disabled', false);
+                        }, 2000);
                     }
                 });
             }

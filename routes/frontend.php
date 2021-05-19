@@ -8,6 +8,8 @@ Route::match(['get', 'post'], 'login', 'Auth\LoginController@showFrmLogin')->nam
 
 Route::match(['get', 'post'], 'register', 'Auth\RegisterController@index')->name('register');
 
+Route::match(['get', 'post'], 'register-create', 'Auth\RegisterController@create')->name('register.create');
+
 Route::match(['get', 'post'], 'login-user', 'Auth\LoginController@login')->name('login_user');
 
 Route::get('/home', 'Frontend\HomeController@index')->name('home');
@@ -16,4 +18,7 @@ Route::get('/', 'Frontend\HomeController@index')->name('principal');
 
 Route::get('category', 'Frontend\CategoryController@index')->name('category');
 
-Route::get('post-complaint', 'Frontend\PostComplaintController@index')->name('PostComplaint.index');
+
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('post-complaint', 'Frontend\PostComplaintController@index')->name('PostComplaint.index');
+});

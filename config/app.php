@@ -56,6 +56,14 @@ return [
 
     'asset_url' => env('ASSET_URL', null),
 
+    'alert_success' => env('MSJ_SUCCESS', 'Los datos se registron exitosamente'),
+
+    'alert_fail' => env('MSJ_FAIL', 'Error al guardar registro'),
+
+    'alert_success_delete' => env('MSJ_SUCCESS_DELETE', 'Registro eliminado exitosamente'),
+
+    'alert_fail_delete' => env('MSJ_FAIL_DELETE', 'Error al eliminar registro'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Timezone

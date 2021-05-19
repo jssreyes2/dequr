@@ -14,8 +14,8 @@ class User extends Authenticatable
 
     const ROL_ADMIN = 1;
     const ROL_OPERATOR = 2;
-    const ROL_REQUESTER = 3;
-    const ROL_DEBT_COLLECTOR = 4;
+    const ROL_BUSINESS= 3;
+    const ROL_USERNAME = 4;
     /**
      * The attributes that are mass assignable.
      *
@@ -52,7 +52,6 @@ class User extends Authenticatable
         $obj->email = $request->email;
         $obj->password = Hash::make($request->password);
         $obj->user_status = $request->user_status;
-        $obj->failed_attempts = $request->failed_attempts;
         $obj->save();
 
         #Guardamos en Activity Log

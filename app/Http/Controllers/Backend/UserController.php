@@ -15,7 +15,6 @@ class UserController extends Controller
         $dataUser = User
             ::join('roles', 'users.rol_id', '=', 'roles.id')
             ->select('users.id', 'users.email', 'users.firstname', 'users.lastname', 'users.user_status', 'roles.name', 'roles.created_at')
-            ->where('roles.id', '!=', User::ROL_REQUESTER)
             ->orderBy('users.firstname')
             ->paginate(50);
 
@@ -57,7 +56,7 @@ class UserController extends Controller
 
         if (isset($items)) {
             if (!$items->isEmpty()) {
-                return response()->json(['status' => 'success', 'alert' => env('MSJ_FAIL')]);
+                return response()->json(['status' => 'fail', 'alert' => env('MSJ_FAIL')]);
             }
         }
 
