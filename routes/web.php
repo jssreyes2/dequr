@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Auth::routes();
-
+Route::match(['get', 'post'], 'logout', 'Auth\LoginController@logout')->name('logout');
 include('frontend.php');
 include('backend/configuration.php');
 include('backend/records.php');
