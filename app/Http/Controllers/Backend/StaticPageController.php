@@ -45,13 +45,13 @@ class StaticPageController extends Controller
      */
     public function store(Request $request)
     {
-        if(empty($request->body)){
+        if (empty($request->body)) {
             return response()->json(['status' => 'fail', 'alert' => 'Por favor, ingrese el contenido']);
         }
 
 
-        $staticPage=StaticPage::where('title', '=', strtoupper($request->title))->first();
-        if($staticPage instanceof StaticPage){
+        $staticPage = StaticPage::where('title', '=', strtoupper($request->title))->first();
+        if ($staticPage instanceof StaticPage) {
             return response()->json(['status' => 'fail', 'alert' => 'El registro ya existe']);
         }
 
@@ -70,29 +70,30 @@ class StaticPageController extends Controller
     public function show(Request $request)
     {
         $staticPages = StaticPage::where([
-            ['type', '=', $request->type]
+            ['page', '=', $request->page]
         ])->where('status', '=', StaticPage::STATIC_PAGE_ACTIVE)->first();
 
         $viewsStatic = StaticPage::TERMS_AND_CONDITIONS;
 
+        if (!$staticPages instanceof StaticPage) {
+            return redirect()->route('principal');
+        }
+
         #Terminos y condiciones
-        if ($request->type == StaticPage::TERMS_AND_CONDITIONS) {
+        if ($request->page == StaticPage::TERMS_AND_CONDITIONS) {
             $viewsStatic = 'terms_and_conditions';
         }
         ##Politica de cookies
-        if ($request->type == StaticPage::COOKIES) {
+        if ($request->page == StaticPage::COOKIES) {
             $viewsStatic = 'cookies';
         }
-        #Politica de privacidad
-        if ($request->type == StaticPage::PRIVACY_POLICIES) {
-            $viewsStatic = 'privacy_policies';
-        }
-        #Quienes somos
-        if ($request->type == StaticPage::ABOUT_US) {
-            $viewsStatic = 'about_us';
+        #Legal
+        if ($request->page == StaticPage::LEGAL) {
+            $viewsStatic = 'legal';
         }
 
-        return view("static/$viewsStatic", ['staticPages' => $staticPages]);
+
+        return view("frontend/$viewsStatic", ['staticPages' => $staticPages]);
     }
 
     /**
@@ -121,12 +122,12 @@ class StaticPageController extends Controller
     public function update(Request $request)
     {
 
-        if(empty($request->body)){
+        if (empty($request->body)) {
             return response()->json(['status' => 'fail', 'alert' => 'Por favor, ingrese el contenido']);
         }
 
-        $staticPage=StaticPage::where([['title', '=', strtoupper($request->title)], ['id', '!=', $request->id]])->first();
-        if($staticPage instanceof StaticPage){
+        $staticPage = StaticPage::where([['title', '=', strtoupper($request->title)], ['id', '!=', $request->id]])->first();
+        if ($staticPage instanceof StaticPage) {
             return response()->json(['status' => 'fail', 'alert' => 'El registro ya existe']);
         }
 

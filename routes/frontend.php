@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\StaticPage;
+
 Route::get('backend/login', function () {
     return view('backend.login');
 });
@@ -18,7 +20,24 @@ Route::get('/', 'Frontend\HomeController@index')->name('principal');
 
 Route::get('category', 'Frontend\CategoryController@index')->name('category');
 
+Route::get('detail-category', 'Frontend\DetailCategoryController@index')->name('detail_category');
+
+Route::get('terms_and_conditions', 'Backend\StaticPageController@show')->name('terms_and_conditions')->defaults('page', StaticPage::TERMS_AND_CONDITIONS);
+
+Route::get('legal', 'Backend\StaticPageController@show')->name('legal')->defaults('page', StaticPage::LEGAL);
 
 Route::group(['middleware' => ['auth']], function () {
     Route::get('post-complaint', 'Frontend\PostComplaintController@index')->name('PostComplaint.index');
+
+    Route::get('profile', 'Frontend\ProfileController@index')->name('profile.index');
+
+    Route::get('notifications', 'Frontend\NotificationController@index')->name('Notification.index');
+
+    Route::get('comments', 'Frontend\CommentController@index')->name('Comment,index');
+
+    Route::get('complaints', 'Frontend\ComplaintController@index')->name('Complaint.index');
+
+    Route::get('companies', 'Frontend\CompanyController@index')->name('Company.index');
+
+    Route::get('company', 'Frontend\CompanyController@index')->name('Company.show');
 });

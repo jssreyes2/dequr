@@ -34,6 +34,10 @@ class AppServiceProvider extends ServiceProvider
             $view->with('permission', Menu::getPermissionHasRoles(Auth::user()->rol_id));
         });
 
+        view()->composer('frontend/layouts/master', function ($view) {
+            $view->with('user', Auth::user());
+        });
+
         #The paginator now uses the Tailwind CSS framework for its default styling
         Paginator::useBootstrap();
     }
