@@ -26,6 +26,12 @@ Route::get('terms_and_conditions', 'Backend\StaticPageController@show')->name('t
 
 Route::get('legal', 'Backend\StaticPageController@show')->name('legal')->defaults('page', StaticPage::LEGAL);
 
+Route::get('companies', 'Frontend\CompanyController@index')->name('Company.index');
+
+Route::get('company', 'Frontend\CompanyController@show')->name('Company.show');
+
+Route::get('complaints', 'Frontend\ComplaintController@index')->name('Complaint.index');
+
 Route::group(['middleware' => ['auth']], function () {
     Route::get('post-complaint', 'Frontend\PostComplaintController@index')->name('PostComplaint.index');
 
@@ -34,10 +40,4 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('notifications', 'Frontend\NotificationController@index')->name('Notification.index');
 
     Route::get('comments', 'Frontend\CommentController@index')->name('Comment,index');
-
-    Route::get('complaints', 'Frontend\ComplaintController@index')->name('Complaint.index');
-
-    Route::get('companies', 'Frontend\CompanyController@index')->name('Company.index');
-
-    Route::get('company', 'Frontend\CompanyController@index')->name('Company.show');
 });
