@@ -15,7 +15,7 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="{{route('backend')}}">Inicio</a></li>
-                            <li class="breadcrumb-item active">Categorías</li>
+                            <li class="breadcrumb-item active">Empresas</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
@@ -33,7 +33,7 @@
                             <div class="card-header">
                                 <h3 class="card-title">Buscador</h3>
                             </div>
-                            <form role="form" action="{{route('categories')}}" method="GET">
+                            <form role="form" action="{{route('business')}}" method="GET">
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-sm-4">
@@ -51,13 +51,13 @@
                                                     <option value=''>
                                                         TODOS
                                                     </option>
-                                                    <option value='{{\App\Models\Category::STATUS_ACTIVE}}'
-                                                            {{(isset($filter['status']) and $filter['status']==\App\Models\Category::STATUS_ACTIVE) ?'selected' : ''}}>
-                                                        {{\App\Models\Category::STATUS_ACTIVE}}
+                                                    <option value='{{\App\Models\Busines::STATUS_ACTIVE}}'
+                                                            {{(isset($filter['status']) and $filter['status']==\App\Models\Busines::STATUS_ACTIVE) ?'selected' : ''}}>
+                                                        {{\App\Models\Busines::STATUS_ACTIVE}}
                                                     </option>
-                                                    <option value='{{\App\Models\Category::STATUS_INACTIVE}}'
-                                                            {{(isset($filter['status']) and $filter['status']==\App\Models\Category::STATUS_INACTIVE)  ?'selected' : ''}}>
-                                                        {{\App\Models\Category::STATUS_INACTIVE}}
+                                                    <option value='{{\App\Models\Busines::STATUS_INACTIVE}}'
+                                                            {{(isset($filter['status']) and $filter['status']==\App\Models\Busines::STATUS_INACTIVE)  ?'selected' : ''}}>
+                                                        {{\App\Models\Busines::STATUS_INACTIVE}}
                                                     </option>
                                                 </select>
                                             </div>
@@ -67,8 +67,8 @@
                                 </div>
                                 <div class="card-footer">
                                     <button type="submit" class="btn btn-info">Buscar</button>
-                                    <a href="{{route('categories')}}" class="btn btn-secondary">Cancelar</a>
-                                    <a href="{{route('category.create')}}" class="btn btn-success">Nuevo</a>
+                                    <a href="{{route('business')}}" class="btn btn-secondary">Cancelar</a>
+                                    <a href="{{route('busines.create')}}" class="btn btn-success">Nuevo</a>
                                 </div>
                             </form>
                         </div>
@@ -87,7 +87,7 @@
                                     <thead>
                                     <tr>
                                         <th>Opciones</th>
-                                        <th>Icono</th>
+                                        <th>Logo</th>
                                         <th>Nombre</th>
                                         <th class="text-center">Estatus</th>
                                         <th class="text-center">Creado</th>
@@ -95,8 +95,8 @@
                                     </thead>
                                     <tbody>
 
-                                    @if(count($categories)>0)
-                                        @foreach($categories AS $items)
+                                    @if(count($business)>0)
+                                        @foreach($business AS $items)
                                             <tr>
                                                 <td>
                                                     <div class="btn-group">
@@ -110,16 +110,23 @@
                                                     </div>
                                                 </td>
 
-                                                <td> <img src="{{ URL::asset('asset/frontend/assets/img/icons/'.$items->icon)}}" alt="{{$items->icon}}"
-                                                          style="width: 40px"></td>
+                                                <td>
+                                                    @if($items->logo)
+                                                    <img src="{{ asset('storage/photo_busines/' .$items->logo)}}" class="img-circle elevation-2" alt="{{$items->logo}}"
+                                                          style="width: 60px">
+                                                    @else
+                                                        <img src="{{ URL::asset('asset/frontend/assets/img/avatar-busines.png')}}" alt="avatar-busines.png"
+                                                             style="width: 60px">
+                                                    @endif
+                                                </td>
 
                                                 <td>{{$items->name}}</td>
 
                                                 <td class="text-center">
-                                                    @if($items->status == \App\Models\Category::STATUS_ACTIVE)
-                                                        <span class="badge bg-green">{{App\Models\Category::STATUS_ACTIVE}}</span>
+                                                    @if($items->status == \App\Models\Busines::STATUS_ACTIVE)
+                                                        <span class="badge bg-green">{{App\Models\Busines::STATUS_ACTIVE}}</span>
                                                     @else
-                                                        <span class="badge bg-red">{{App\Models\Category::STATUS_INACTIVE}}</span>
+                                                        <span class="badge bg-red">{{App\Models\Busines::STATUS_INACTIVE}}</span>
                                                     @endif
                                                 </td>
 
@@ -141,9 +148,9 @@
                                     </tbody>
                                 </table>
 
-                                @if (isset($categories))
+                                @if (isset($business))
                                     <div style="padding: 10px">
-                                        {{ $categories->appends(((isset($filter)) ? $filter : ''))->links() }}
+                                        {{ $business->appends(((isset($filter)) ? $filter : ''))->links() }}
                                     </div>
                                 @endif
                             </div>
@@ -158,5 +165,5 @@
         </section>
         <!-- /.content -->
     </div>
-    @include('backend.functions.functions_category')
+    @include('backend.functions.functions_busines')
 @endsection

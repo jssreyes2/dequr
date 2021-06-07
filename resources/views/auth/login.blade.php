@@ -70,7 +70,7 @@
                         $('#loading').hide();
 
                         if (respuesta.status == 'success') {
-                            window.location.href = "{{route('PostComplaint.index')}}";
+                            window.location.href = "{{route('post_complaint.index')}}";
                         }
 
                         if (respuesta.status == 'fail') {

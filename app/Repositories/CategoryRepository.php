@@ -19,7 +19,12 @@ class CategoryRepository extends Category
 
         if (isset($filter) and !empty($filter['status'])) {
 
-            $query->where('categories.status', 'LIKE', "%" . $filter['status'] . "%");
+            $query->where('categories.status', '=',  $filter['status']);
+        }
+
+        if (isset($filter) and !empty($filter['slug'])) {
+
+            $query->where('categories.slug', '=', $filter['slug']);
         }
 
         $query->orderBy('name');

@@ -80,7 +80,7 @@
                         showAlert(respuesta.alert, respuesta.status);
 
                         if (respuesta.status == 'success') {
-                            window.location.href = "{{route('PostComplaint.index')}}";
+                            window.location.href = "{{route('post_complaint.index')}}";
                         }
 
                         setTimeout(function () {

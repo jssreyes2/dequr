@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Hash;
 
 class Category extends Model
 {
@@ -24,10 +23,11 @@ class Category extends Model
     static public function saveCategory($request)
     {
         $obj = new self();
-
+        $slug = str_slug($request->name, '-');
         $obj->name = ucfirst(mb_strtolower($request->name));
         $obj->icon = strtolower($request->icon);
         $obj->status = $request->status;
+        $obj->slug = $slug;
         $obj->save();
 
         #Guardamos en Activity Log
@@ -42,9 +42,11 @@ class Category extends Model
         $obj = new self();
         $obj = $obj->find($request->id);
 
+        $slug = str_slug($request->name, '-');
         $obj->name = ucfirst(mb_strtolower($request->name));
-        $obj->icon = strtolower($request->firstname);
+        $obj->icon = strtolower($request->icon);
         $obj->status = $request->status;
+        $obj->slug = $slug;
         $obj->save();
 
         #Guardamos en Activity Log

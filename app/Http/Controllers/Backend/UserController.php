@@ -70,7 +70,7 @@ class UserController extends Controller
             $password = $request->get('password');
             $firstname = ucfirst(mb_strtolower($request->get('firstname')));
 
-            $bodyTemplate = "Estimado usuario $firstname usted ha sido registrado en nuestro sistema para la administración de nuestros procesos, los datos son los 
+            $bodyTemplate = "Estimado usuario $firstname usted ha sido registrado en nuestro sistema para la administración de nuestros procesos, los datos son los
         siguientes:<br><br><p>Correo electrónico: $email </p> <p>Contrase&ntilde;a:  $password </p>";
 
             Event(new UserOperadorSendMail($request->get('firstname'), $request->get('email'), $bodyTemplate));
@@ -123,7 +123,7 @@ class UserController extends Controller
             return response()->json(['status' => 'success', 'alert' => env('MSJ_SUCCESS')]);
         }
 
-        return response()->json(['status' => 'success', 'alert' => env('MSJ_FAIL')]);
+        return response()->json(['status' => 'fail', 'alert' => env('MSJ_FAIL')]);
     }
 
     /**

@@ -15,7 +15,7 @@
     });
 
     function refresh() {
-        window.location.href = "{{ route('StaticPage.index') }}";
+        window.location.href = "{{ route('static_page.index') }}";
     }
 
     $("body").on('submit', '#form-static-page', function (event) {
@@ -36,9 +36,9 @@
             var ruta = $("input[name='ruta']").val();
 
             if (ruta == 'store') {
-                var route = "{{ route('StaticPage.store') }}";
+                var route = "{{ route('static_page.store') }}";
             } else {
-                var route = "{{ route('StaticPage.update') }}";
+                var route = "{{ route('static_page.update') }}";
             }
 
             $.ajax({
@@ -81,7 +81,7 @@
     function deleteData() {
 
         var id = $('#id_eliminar').val();
-        var route = "{{ route('StaticPage.delete') }}";
+        var route = "{{ route('static_page.delete') }}";
 
         $.ajaxSetup({
             headers: {

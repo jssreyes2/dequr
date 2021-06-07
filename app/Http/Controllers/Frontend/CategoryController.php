@@ -3,12 +3,19 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Models\Category;
+use App\Repositories\CategoryRepository;
 
 class CategoryController extends Controller
 {
     public function index()
     {
-        return view('frontend.category');
+        $filter = [
+            'status' => Category::STATUS_ACTIVE,
+        ];
+
+        $categories = CategoryRepository::getCategories($filter)->get();
+
+        return view('frontend.category', ['categories' => $categories]);
     }
 }

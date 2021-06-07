@@ -56,9 +56,7 @@ class User extends Authenticatable
 
         #Guardamos en Activity Log
         ActivityLog::saveActivityLog($obj, 'saveUser', [
-            'firstname' => ucfirst(strtolower($request->firstname)),
-            'lastname' => ucfirst(strtolower($request->lastname)),
-            'email' => $request->email
+            'user' => $obj
         ]);
         return $obj;
     }
@@ -77,13 +75,23 @@ class User extends Authenticatable
 
         #Guardamos en Activity Log
         ActivityLog::saveActivityLog($obj, 'updateUser', [
-            'firstname' => ucfirst(strtolower($request->firstname)),
-            'lastname' => ucfirst(strtolower($request->lastname)),
-            'email' => $request->email
+            'user' => $obj
         ]);
 
         return $obj;
     }
+
+
+    static public function updatePassword($request)
+    {
+        $obj = new self();
+        $obj = $obj->find($request->id);
+        $obj->password = Hash::make($request->password);
+        $obj->save();
+
+        return $obj;
+    }
+
 
     static public function deleteUser($id)
     {

@@ -3,6 +3,7 @@
 @section('content')
 
     @include('backend.layouts.modal_delete')
+    <div id="modal-complaint"></div>
 
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -15,7 +16,7 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="{{route('backend')}}">Inicio</a></li>
-                            <li class="breadcrumb-item active">Categorías</li>
+                            <li class="breadcrumb-item active">Quejas</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
@@ -33,32 +34,66 @@
                             <div class="card-header">
                                 <h3 class="card-title">Buscador</h3>
                             </div>
-                            <form role="form" action="{{route('categories')}}" method="GET">
+                            <form role="form" action="{{route('reports_complaint.index')}}" method="GET">
                                 <div class="card-body">
                                     <div class="row">
-                                        <div class="col-sm-4">
+                                        <div class="col-sm-6">
                                             <div class="form-group">
-                                                <label>Nombre</label>
+                                                <label>Usuario / Título</label>
                                                 <input type="text" class="form-control" id="search" name="search"
                                                        value="{{ (isset($filter['search']) and !empty($filter['search'])) ? $filter['search'] : ''}}" autocomplete="off">
                                             </div>
                                         </div>
 
-                                        <div class="col-sm-4">
+                                        <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label>Estatus</label>
-                                                <select class='form-control required tdtextarea' id='status' name='status'>
+                                                <select class='form-control' id='status' name='status'>
                                                     <option value=''>
                                                         TODOS
                                                     </option>
-                                                    <option value='{{\App\Models\Category::STATUS_ACTIVE}}'
-                                                            {{(isset($filter['status']) and $filter['status']==\App\Models\Category::STATUS_ACTIVE) ?'selected' : ''}}>
-                                                        {{\App\Models\Category::STATUS_ACTIVE}}
+                                                    <option value='{{\App\Models\Busines::STATUS_ACTIVE}}'
+                                                            {{(isset($filter['status']) and $filter['status']==\App\Models\Busines::STATUS_ACTIVE) ?'selected' : ''}}>
+                                                        {{\App\Models\Busines::STATUS_ACTIVE}}
                                                     </option>
-                                                    <option value='{{\App\Models\Category::STATUS_INACTIVE}}'
-                                                            {{(isset($filter['status']) and $filter['status']==\App\Models\Category::STATUS_INACTIVE)  ?'selected' : ''}}>
-                                                        {{\App\Models\Category::STATUS_INACTIVE}}
+                                                    <option value='{{\App\Models\Busines::STATUS_INACTIVE}}'
+                                                            {{(isset($filter['status']) and $filter['status']==\App\Models\Busines::STATUS_INACTIVE)  ?'selected' : ''}}>
+                                                        {{\App\Models\Busines::STATUS_INACTIVE}}
                                                     </option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>Empresas</label>
+                                                <select class='form-control' id='busine_id' name='busine_id'>
+                                                    <option value="">
+                                                        Empresas
+                                                    </option>
+                                                    @foreach($business AS $item)
+                                                        <option value="{{$item->id}}"
+                                                            {{(isset($filter['busine_id']) and $filter['busine_id']==$item->id) ?'selected' : ''}}>
+                                                            {{ucwords(mb_strtolower($item->name))}}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>País</label>
+                                                <select class='form-control' id='country_id' name='country_id'>
+                                                    <option value="">
+                                                        País
+                                                    </option>
+                                                    @foreach($countries AS $item)
+                                                        <option value="{{$item->id}}"
+                                                            {{(isset($filter['country_id']) and $filter['country_id']==$item->id) ?'selected' : ''}}>
+                                                            {{ucwords(mb_strtolower($item->name))}}
+                                                        </option>
+                                                    @endforeach
                                                 </select>
                                             </div>
                                         </div>
@@ -67,8 +102,7 @@
                                 </div>
                                 <div class="card-footer">
                                     <button type="submit" class="btn btn-info">Buscar</button>
-                                    <a href="{{route('categories')}}" class="btn btn-secondary">Cancelar</a>
-                                    <a href="{{route('category.create')}}" class="btn btn-success">Nuevo</a>
+                                    <a href="{{route('reports_complaint.index')}}" class="btn btn-secondary">Cancelar</a>
                                 </div>
                             </form>
                         </div>
@@ -87,16 +121,19 @@
                                     <thead>
                                     <tr>
                                         <th>Opciones</th>
-                                        <th>Icono</th>
-                                        <th>Nombre</th>
+                                        <th>Usuario</th>
+                                        <th>Email</th>
+                                        <th>Título</th>
+                                        <th>Empresa</th>
+                                        <th>País</th>
                                         <th class="text-center">Estatus</th>
                                         <th class="text-center">Creado</th>
                                     </tr>
                                     </thead>
                                     <tbody>
 
-                                    @if(count($categories)>0)
-                                        @foreach($categories AS $items)
+                                    @if(count($complaints)>0)
+                                        @foreach($complaints AS $items)
                                             <tr>
                                                 <td>
                                                     <div class="btn-group">
@@ -105,21 +142,30 @@
                                                             <div class="dropdown-menu" role="menu" id="{{$items->id}}">
                                                                 <a class="dropdown-item edit_register" data-id="{{$items->id}}"> <i class="fa fa-edit"></i> Editar</a>
                                                                 <a class="dropdown-item delete_register" data-id="{{$items->id}}"> <i class="fa fa-trash"></i> Eliminar</a>
+                                                                <a class="dropdown-item download-file-complaint" data-id="{{$items->id}}">
+                                                                    <i class="fa fa-book"></i> Archivos
+                                                                </a>
+                                                                <a class="dropdown-item modal-complaint" data-id="{{$items->id}}"> <i class="fa fa-search"></i> Detalle</a>
                                                             </div>
                                                         </button>
                                                     </div>
                                                 </td>
 
-                                                <td> <img src="{{ URL::asset('asset/frontend/assets/img/icons/'.$items->icon)}}" alt="{{$items->icon}}"
-                                                          style="width: 40px"></td>
+                                                <td>{{ucwords(mb_strtolower($items->firstname.' '.$items->lastname))}}</td>
 
-                                                <td>{{$items->name}}</td>
+                                                <td>{{$items->email}}</td>
+
+                                                <td>{{ucwords(mb_strtolower($items->title))}}</td>
+
+                                                <td>{{ucwords(mb_strtolower($items->busine_name))}}</td>
+
+                                                <td>{{ucwords(mb_strtolower($items->country_name))}}</td>
 
                                                 <td class="text-center">
-                                                    @if($items->status == \App\Models\Category::STATUS_ACTIVE)
-                                                        <span class="badge bg-green">{{App\Models\Category::STATUS_ACTIVE}}</span>
+                                                    @if($items->status == \App\Models\Complaint::COMPLAINT_ACTIVE)
+                                                        <span class="badge bg-green">{{App\Models\Complaint::COMPLAINT_ACTIVE}}</span>
                                                     @else
-                                                        <span class="badge bg-red">{{App\Models\Category::STATUS_INACTIVE}}</span>
+                                                        <span class="badge bg-red">{{App\Models\Complaint::COMPLAINT_INACTIVE}}</span>
                                                     @endif
                                                 </td>
 
@@ -128,7 +174,7 @@
                                         @endforeach()
                                     @else
                                         <tr>
-                                            <td colspan="5">
+                                            <td colspan="8">
                                                 @foreach ($errors->all() as $error)
                                                     <div class="alert alert-info alert-dismissible">
                                                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
@@ -141,9 +187,9 @@
                                     </tbody>
                                 </table>
 
-                                @if (isset($categories))
+                                @if (isset($complaints))
                                     <div style="padding: 10px">
-                                        {{ $categories->appends(((isset($filter)) ? $filter : ''))->links() }}
+                                        {{ $complaints->appends(((isset($filter)) ? $filter : ''))->links() }}
                                     </div>
                                 @endif
                             </div>
@@ -158,5 +204,5 @@
         </section>
         <!-- /.content -->
     </div>
-    @include('backend.functions.functions_category')
+    @include('backend.functions.functions_complaint')
 @endsection

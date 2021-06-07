@@ -20,24 +20,36 @@ Route::get('/', 'Frontend\HomeController@index')->name('principal');
 
 Route::get('category', 'Frontend\CategoryController@index')->name('category');
 
-Route::get('detail-category', 'Frontend\DetailCategoryController@index')->name('detail_category');
+Route::match(['get', 'post'], 'detail-category/{slug}', 'Frontend\DetailCategoryController@index')->name('detail_category');
 
 Route::get('terms_and_conditions', 'Backend\StaticPageController@show')->name('terms_and_conditions')->defaults('page', StaticPage::TERMS_AND_CONDITIONS);
 
 Route::get('legal', 'Backend\StaticPageController@show')->name('legal')->defaults('page', StaticPage::LEGAL);
 
-Route::get('companies', 'Frontend\CompanyController@index')->name('Company.index');
+Route::get('companies', 'Frontend\CompanyController@index')->name('company.index');
 
 Route::get('company', 'Frontend\CompanyController@show')->name('Company.show');
 
-Route::get('complaints', 'Frontend\ComplaintController@index')->name('Complaint.index');
+Route::match(['get', 'post'], 'complaints', 'Frontend\ComplaintController@index')->name('complaint.index');
+
+Route::get('post-complaint', 'Frontend\PostComplaintController@index')->name('post_complaint.index');
+
+Route::match(['get', 'post'], 'post-complaint-store', 'Frontend\PostComplaintController@store')->name('post_complaint.store');
+
 
 Route::group(['middleware' => ['auth']], function () {
-    Route::get('post-complaint', 'Frontend\PostComplaintController@index')->name('PostComplaint.index');
+
 
     Route::get('profile', 'Frontend\ProfileController@index')->name('profile.index');
 
+    Route::match(['get', 'post'], 'update-avatar', 'Frontend\ProfileController@updateAvatar')->name('profile.updateAvatar');
+
+    Route::match(['get', 'post'], 'update-profile', 'Frontend\ProfileController@updateProfile')->name('profile.updateProfile');
+
+    Route::match(['get', 'post'], 'update-password', 'Frontend\ProfileController@updatePassword')->name('profile.updatePassword');
+
     Route::get('notifications', 'Frontend\NotificationController@index')->name('Notification.index');
 
-    Route::get('comments', 'Frontend\CommentController@index')->name('Comment,index');
+    Route::get('comments', 'Frontend\CommentController@index')->name('comment.index');
+
 });

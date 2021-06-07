@@ -42,7 +42,7 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -51,11 +51,48 @@ class CategoryController extends Controller
         $category = Category::where('name', '=', $request->name)->first();
 
         if ($category instanceof Category) {
-                return response()->json(['status' => 'fail', 'alert' => env('MSJ_FAIL')]);
+            return response()->json(['status' => 'fail', 'alert' => env('MSJ_FAIL')]);
         }
 
         Category::saveCategory($request);
 
         return response()->json(['status' => 'success', 'alert' => env('MSJ_SUCCESS'), 'create' => true, 'update' => false]);
+    }
+
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id, $route = null)
+    {
+        $category = Category::where('id', '=', $id)->first();
+
+        return view('backend.forms.forms_category', [
+            'route' => $route,
+            'category' => $category
+        ]);
+    }
+
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request)
+    {
+
+        $category = Category::updateCategory($request);
+
+        if ($category) {
+            return response()->json(['status' => 'success', 'alert' => env('MSJ_SUCCESS')]);
+        }
+
+        return response()->json(['status' => 'success', 'alert' => env('MSJ_FAIL')]);
     }
 }
