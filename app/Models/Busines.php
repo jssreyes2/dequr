@@ -27,6 +27,7 @@ class Busines extends Model
         $obj->name = mb_strtoupper($request->name);
         $obj->description = ucfirst(mb_strtolower($request->description));
         $obj->status = $request->status;
+        $obj->category_id = $request->category_id;
         $obj->slug = $slug;
         $obj->save();
 
@@ -43,6 +44,7 @@ class Busines extends Model
         $obj = new self();
         $slug = str_slug($request->busine, '-');
         $obj->name = mb_strtoupper($request->busine);
+        $obj->category_id = $request->category_id;
         $obj->status = Busines::STATUS_ACTIVE;
         $obj->slug = $slug;
         $obj->save();
@@ -61,6 +63,7 @@ class Busines extends Model
         $obj->name = mb_strtoupper($request->name);
         $obj->description = ucfirst(mb_strtolower($request->description));
         $obj->status = $request->status;
+        $obj->category_id = $request->category_id;
         $obj->slug = $slug;
         $obj->save();
 

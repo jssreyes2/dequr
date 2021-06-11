@@ -10,7 +10,10 @@ class BusinesRepository extends Busines
 
     public static function getBusiness($filter = [])
     {
-        $query = Busines::query();
+
+        $query = Busines::join('categories', 'business.category_id', '=', 'categories.id');
+
+        $query->select('business.*', 'categories.name As category_name');
 
         if (isset($filter) and !empty($filter['search'])) {
 
@@ -19,7 +22,7 @@ class BusinesRepository extends Busines
 
         if (isset($filter) and !empty($filter['status'])) {
 
-            $query->where('status', '=',  $filter['status']);
+            $query->where('business.status', '=',  $filter['status']);
         }
 
         if (isset($filter) and !empty($filter['slug'])) {

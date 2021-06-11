@@ -30,12 +30,13 @@ Route::get('companies', 'Frontend\CompanyController@index')->name('company.index
 
 Route::get('company', 'Frontend\CompanyController@show')->name('Company.show');
 
-Route::match(['get', 'post'], 'complaints', 'Frontend\ComplaintController@index')->name('complaint.index');
+Route::match(['get', 'post'], 'complaints/{slug}', 'Frontend\ComplaintController@index')->name('complaint.index');
 
 Route::get('post-complaint', 'Frontend\PostComplaintController@index')->name('post_complaint.index');
 
 Route::match(['get', 'post'], 'post-complaint-store', 'Frontend\PostComplaintController@store')->name('post_complaint.store');
 
+Route::match(['get', 'post'], 'register-comment', 'Backend\CommentController@store')->name('comment.store');
 
 Route::group(['middleware' => ['auth']], function () {
 

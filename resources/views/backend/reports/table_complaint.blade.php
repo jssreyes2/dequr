@@ -127,6 +127,7 @@
                                         <th>Empresa</th>
                                         <th>País</th>
                                         <th class="text-center">Estatus</th>
+                                        <th class="text-center">Tipo</th>
                                         <th class="text-center">Creado</th>
                                     </tr>
                                     </thead>
@@ -166,6 +167,14 @@
                                                         <span class="badge bg-green">{{App\Models\Complaint::COMPLAINT_ACTIVE}}</span>
                                                     @else
                                                         <span class="badge bg-red">{{App\Models\Complaint::COMPLAINT_INACTIVE}}</span>
+                                                    @endif
+                                                </td>
+
+                                                <td class="text-center">
+                                                    @if($items->type == \App\Models\Complaint::TYPE_PROMINENT)
+                                                        <span class="badge bg-green">{{App\Models\Complaint::TYPE_PROMINENT}}</span>
+                                                    @else
+                                                        <span class="badge bg-red">{{App\Models\Complaint::TYPE_FOR_DESTACAR}}</span>
                                                     @endif
                                                 </td>
 

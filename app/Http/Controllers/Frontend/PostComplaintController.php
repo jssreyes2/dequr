@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Busines;
+use App\Models\Category;
 use App\Models\Complaint;
 use App\Models\Country;
 use App\Services\PhotoImportServices;
@@ -16,9 +17,11 @@ class PostComplaintController extends Controller
     {
         $countries = Country::OrderBy('name', 'ASC')->get();
 
-        $busines = Busines::OrderBy('name', 'ASC')->get();
+        $busines = Busines::where('status', '=', Busines::STATUS_ACTIVE)->OrderBy('name', 'ASC')->get();
 
-        return view('frontend.post_complaint', ['countries' => $countries, 'busines' => $busines]);
+        $categories = Category::where('status', '=', Category::STATUS_ACTIVE)->OrderBy('name', 'ASC')->get();
+
+        return view('frontend.post_complaint', ['countries' => $countries, 'busines' => $busines, 'categories' => $categories]);
     }
 
 
@@ -43,6 +46,6 @@ class PostComplaintController extends Controller
             $PhotoImportServices->importFileComplaint($complaint, $request);
         }
 
-        return response()->json(['status' => 'success', 'alert' => config('app.alert_success')]);
+        return response()->json(['status' => 'success', 'message' => config('app.alert_success')]);
     }
 }

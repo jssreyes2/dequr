@@ -3,12 +3,81 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Busines;
+use App\Models\Category;
+use App\Models\Comment;
+use App\Models\Complaint;
+use App\Models\Country;
+use App\Repositories\CommentRepository;
+use App\Repositories\ComplaintRepository;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class ComplaintController extends Controller
 {
-    public function index()
+    public function index($slug)
     {
-        return view('frontend.complaints');
+
+        $complaint = ComplaintRepository::getComplaint(['slug_complaint' => $slug])->first();
+
+        if(empty($complaint)){
+            return redirect()->route('principal');
+        }
+
+        $date = Carbon::parse($complaint->created_at);
+
+        $comments=CommentRepository::getComments(['complaint_id' => $complaint->id, 'status' => Comment::STATUS_ACTIVE])->get();
+
+        $recentComplaints = ComplaintRepository::getComplaint(['status' => Complaint::COMPLAINT_ACTIVE])->paginate(5);
+
+        return view('frontend.complaints', [
+            'complaint' =>$complaint,
+            'date' => $date->toFormattedDateString(),
+            'comments' => $comments,
+            'recentComplaints' => $recentComplaints
+        ]);
     }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id, $route = null)
+    {
+        $complaint = Complaint::where('id', '=', $id)->first();
+
+        $countries = Country::OrderBy('name', 'ASC')->get();
+
+        $busines = Busines::OrderBy('name', 'ASC')->get();
+
+        return view('backend.forms.forms_complaint', [
+            'route' => $route,
+            'complaint' => $complaint,
+            'countries' => $countries,
+            'busines' => $busines
+        ]);
+    }
+
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request)
+    {
+        $complaint = Complaint::updateComplaint($request);
+
+        if ($complaint) {
+            return response()->json(['status' => 'success', 'alert' => env('MSJ_SUCCESS'), 'update' => true]);
+        }
+
+        return response()->json(['status' => 'success', 'alert' => env('MSJ_FAIL')]);
+    }
+
+
 }

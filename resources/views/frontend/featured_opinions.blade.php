@@ -1,38 +1,28 @@
-@extends('frontend.layouts.master', ['class_body' => 'categories'])
-@section('content')
-    <div class="breadcrumbs">
-        <a href="{{route('principal')}}">Inicio »</a>
-        <span>Categorías</span>
-    </div>
+@if(count($complaintsPromient) > 0)
+    <div class="featured-opinions">
+        <h2 class="title">Opiniones destacadas</h2>
+        <div class="carousel">
+            @foreach($complaintsPromient AS  $item)
+                <div class="carousel__item">
+                    <h3 class="title">{{ucwords(mb_strtolower($item->title))}}</h3>
+                    <a href="{{url('complaints/'.$item->slug)}}" class="read-more">Ver reseña</a>
+                    <div class="business">
+                        <div class="logo">
 
-    <main class="main">
-        <div class="grid-categories">
-            <div class="grid-categories__header">
-                <h3 class="title">Busca por categorías</h3>
-            </div>
-            <div class="grid-categories__list">
+                            @if(!empty($item->logo))
+                                <img src="{{ asset('storage/photo_busines/' .$item->logo)}}" alt="{{ucwords(mb_strtolower($item->busine_name))}}">
+                            @else
+                                <img src="{{ asset('asset/frontend/assets/img/avatar-busines.jpg')}}" alt="{{ucwords(mb_strtolower($item->busine_name))}}">
+                            @endif
 
-                @if(count($categories) > 0)
-                    @foreach($categories AS $item)
-                        <a href="{{url('detail-category/'.$item->slug)}}">
-                            <img src="{{ asset('asset/frontend/assets/img/icons/'.$item->icon)}}" alt="{{$item->name}}">
-                            <h3>{{ucwords(mb_strtolower($item->name))}}</h3>
-                        </a>
-                    @endforeach
-                @endif
-
-            </div>
+                        </div>
+                        <a href="{{route('Company.show')}}">{{ucwords(mb_strtolower($item->busine_name))}}</a>
+                    </div>
+                </div>
+            @endforeach
         </div>
-
-        @include('frontend.featured_opinions_category')
-
-        @include('frontend.recent_opinions_category')
-
-        @include('frontend.recent_activity_category')
-
-    </main>
-@endsection
-
+    </div>
+@endif
 
 @section('script')
     <script type="application/javascript">

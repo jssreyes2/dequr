@@ -28,13 +28,13 @@
                 </div>
                 <div class="buttons">
                     <a href="#" class="btn-web">Visitar página web</a>
-                    <a href="publica-tu-{{route('complaint.index')}}" class="btn-add-opinion">Agregar tu opinión</a>
+                    <a href="publica-tu-" class="btn-add-opinion">Agregar tu opinión</a>
                 </div>
             </div>
 
             <div class="box-opinions">
                 <div class="opinion-item">
-                    <h2 class="title"><a href="{{route('complaint.index')}}">Estafadores me robaron 100.000 COP</a></h2>
+                    <h2 class="title"><a href="">Estafadores me robaron 100.000 COP</a></h2>
                     <p class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Id blanditiis magni consequuntur aliquid, harum, laborum deleniti eius libero hic laboriosam repellendus ipsa sint recusandae repellat quisquam! Eum eos at atque similique inventore accusamus ea corporis!</p>
                     <div class="post-info">
                         <div class="user">
@@ -129,7 +129,7 @@
                     </div>
                 </div>
                 <div class="opinion-item">
-                    <h2 class="title"><a href="{{route('complaint.index')}}">Estafadores me robaron 100.000 COP</a></h2>
+                    <h2 class="title"><a href="">Estafadores me robaron 100.000 COP</a></h2>
                     <p class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Id blanditiis magni consequuntur aliquid, harum, laborum deleniti eius libero hic laboriosam repellendus ipsa sint recusandae repellat quisquam! Eum eos at atque similique inventore accusamus ea corporis!</p>
                     <div class="post-info">
                         <div class="user">
@@ -238,7 +238,7 @@
                             </div>
                             <h3 class="title">Servibanca - Bogotá, cobro de transacción sin que se realice y doblemente, que robo</h3>
                         </div>
-                        <a href="{{route('complaint.index')}}" class="read-more">Ver reseña</a>
+                        <a href="" class="read-more">Ver reseña</a>
                     </div>
                     <div class="grid__item">
                         <div class="copy">
@@ -248,7 +248,7 @@
                             </div>
                             <h3 class="title">Servibanca - Bogotá, cobro de transacción sin que se realice y doblemente, que robo</h3>
                         </div>
-                        <a href="{{route('complaint.index')}}" class="read-more">Ver reseña</a>
+                        <a href="" class="read-more">Ver reseña</a>
                     </div>
                     <div class="grid__item">
                         <div class="copy">
@@ -258,7 +258,7 @@
                             </div>
                             <h3 class="title">Servibanca - Bogotá, cobro de transacción sin que se realice y doblemente, que robo</h3>
                         </div>
-                        <a href="{{route('complaint.index')}}" class="read-more">Ver reseña</a>
+                        <a href="" class="read-more">Ver reseña</a>
                     </div>
                     <div class="grid__item">
                         <div class="copy">
@@ -268,7 +268,7 @@
                             </div>
                             <h3 class="title">Servibanca - Bogotá, cobro de transacción sin que se realice y doblemente, que robo</h3>
                         </div>
-                        <a href="{{route('complaint.index')}}" class="read-more">Ver reseña</a>
+                        <a href="" class="read-more">Ver reseña</a>
                     </div>
                 </div>
             </div>

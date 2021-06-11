@@ -3,7 +3,7 @@
     <div class="breadcrumbs">
         <a href="{{route('principal')}}">Inicio »</a>
         <a href="{{route('category')}}">Categorías »</a>
-        <span>Universidades</span>
+        <span>{{ucwords(mb_strtolower($category->name))}}</span>
     </div>
 
     <main class="main">
@@ -21,146 +21,44 @@
                     <button type="submit"></button>
                 </form>
             </div>
+
             <div class="grid-business">
-                <div class="item-box">
-                    <div class="logo">
-                        <img src="{{ asset('asset/frontend/assets/img/logos/ike-asistencia.png')}}" alt="IKE Asistencia Colombia">
-                    </div>
-                    <div class="copy">
-                        <h2 class="title">IKE Asistencia Colombia</h2>
-                        <div class="rating">
-                            <div class="stars">
-                                <span class="star-completed"></span>
-                                <span class="star-completed"></span>
-                                <span class="star-completed"></span>
-                                <span class="star-completed"></span>
-                                <span class="star-empty"></span>
-                            </div>
-                            <div class="percentage">4.0%</div>
+
+                @foreach($business AS $item)
+                    <div class="item-box">
+                        <div class="logo">
+
+                            @if(!empty($item->logo))
+                                <img src="{{ asset('storage/photo_busines/' .$item->logo)}}" alt="{{ucwords(mb_strtolower($item->name))}}">
+                            @else
+                                <img src="{{ asset('asset/frontend/assets/img/avatar-busines.jpg')}}" alt="{{ucwords(mb_strtolower($item->name))}}">
+                            @endif
+
                         </div>
-                        <div class="opinions">Opiniones 150 | Bueno</div>
-                    </div>
-                    <div class="buttons">
-                        <a href="empresa.php" class="btn-see">Ver empresa</a>
-                        <a href="publica-tu-queja.php" class="btn-add-opinion">Agregar tu opinión</a>
-                    </div>
-                </div>
-                <div class="item-box">
-                    <div class="logo">
-                        <img src="{{ asset('asset/frontend/assets/img/logos/fuego-vida.png')}}" alt="Fuego de Vida España">
-                    </div>
-                    <div class="copy">
-                        <h2 class="title">Fuego de Vida España</h2>
-                        <div class="rating">
-                            <div class="stars">
-                                <span class="star-completed"></span>
-                                <span class="star-completed"></span>
-                                <span class="star-completed"></span>
-                                <span class="star-completed"></span>
-                                <span class="star-empty"></span>
+                        <div class="copy">
+                            <h2 class="title">{{ucwords(mb_strtolower($item->name))}}</h2>
+                            <div class="rating">
+                                <div class="stars">
+                                    <span class="star-completed"></span>
+                                    <span class="star-completed"></span>
+                                    <span class="star-completed"></span>
+                                    <span class="star-completed"></span>
+                                    <span class="star-empty"></span>
+                                </div>
+                                <div class="percentage">4.0%</div>
                             </div>
-                            <div class="percentage">4.0%</div>
+                            <div class="opinions">Opiniones 150 | Bueno</div>
                         </div>
-                        <div class="opinions">Opiniones 150 | Bueno</div>
-                    </div>
-                    <div class="buttons">
-                        <a href="empresa.php" class="btn-see">Ver empresa</a>
-                        <a href="publica-tu-queja.php" class="btn-add-opinion">Agregar tu opinión</a>
-                    </div>
-                </div>
-                <div class="item-box">
-                    <div class="logo">
-                        <img src="{{ asset('asset/frontend/assets/img/logos/rv-inmobiliaria.png')}}" alt="RV Inmobiliaria">
-                    </div>
-                    <div class="copy">
-                        <h2 class="title">RV Inmobiliaria</h2>
-                        <div class="rating">
-                            <div class="stars">
-                                <span class="star-completed"></span>
-                                <span class="star-completed"></span>
-                                <span class="star-completed"></span>
-                                <span class="star-completed"></span>
-                                <span class="star-empty"></span>
-                            </div>
-                            <div class="percentage">4.0%</div>
+                        <div class="buttons">
+                            <a href="" class="btn-see">Ver empresa</a>
+                            <a href="{{route('post_complaint.index')}}" class="btn-add-opinion">Agregar tu opinión</a>
                         </div>
-                        <div class="opinions">Opiniones 150 | Bueno</div>
                     </div>
-                    <div class="buttons">
-                        <a href="empresa.php" class="btn-see">Ver empresa</a>
-                        <a href="publica-tu-queja.php" class="btn-add-opinion">Agregar tu opinión</a>
-                    </div>
-                </div>
-                <div class="item-box">
-                    <div class="logo">
-                        <img src="{{ asset('asset/frontend/assets/img/logos/viajes-exito.png')}}" alt="Viajes Éxito">
-                    </div>
-                    <div class="copy">
-                        <h2 class="title">Viajes Éxito</h2>
-                        <div class="rating">
-                            <div class="stars">
-                                <span class="star-completed"></span>
-                                <span class="star-completed"></span>
-                                <span class="star-completed"></span>
-                                <span class="star-completed"></span>
-                                <span class="star-empty"></span>
-                            </div>
-                            <div class="percentage">4.0%</div>
-                        </div>
-                        <div class="opinions">Opiniones 150 | Bueno</div>
-                    </div>
-                    <div class="buttons">
-                        <a href="empresa.php" class="btn-see">Ver empresa</a>
-                        <a href="publica-tu-queja.php" class="btn-add-opinion">Agregar tu opinión</a>
-                    </div>
-                </div>
-                <div class="item-box">
-                    <div class="logo">
-                        <img src="{{ asset('asset/frontend/assets/img/logos/ike-asistencia.png')}}" alt="IKE Asistencia Colombia">
-                    </div>
-                    <div class="copy">
-                        <h2 class="title">IKE Asistencia Colombia</h2>
-                        <div class="rating">
-                            <div class="stars">
-                                <span class="star-completed"></span>
-                                <span class="star-completed"></span>
-                                <span class="star-completed"></span>
-                                <span class="star-completed"></span>
-                                <span class="star-empty"></span>
-                            </div>
-                            <div class="percentage">4.0%</div>
-                        </div>
-                        <div class="opinions">Opiniones 150 | Bueno</div>
-                    </div>
-                    <div class="buttons">
-                        <a href="empresa.php" class="btn-see">Ver empresa</a>
-                        <a href="publica-tu-queja.php" class="btn-add-opinion">Agregar tu opinión</a>
-                    </div>
-                </div>
-                <div class="item-box">
-                    <div class="logo">
-                        <img src="{{ asset('asset/frontend/assets/img/logos/fuego-vida.png')}}" alt="Fuego de Vida España">
-                    </div>
-                    <div class="copy">
-                        <h2 class="title">Fuego de Vida España</h2>
-                        <div class="rating">
-                            <div class="stars">
-                                <span class="star-completed"></span>
-                                <span class="star-completed"></span>
-                                <span class="star-completed"></span>
-                                <span class="star-completed"></span>
-                                <span class="star-empty"></span>
-                            </div>
-                            <div class="percentage">4.0%</div>
-                        </div>
-                        <div class="opinions">Opiniones 150 | Bueno</div>
-                    </div>
-                    <div class="buttons">
-                        <a href="empresa.php" class="btn-see">Ver empresa</a>
-                        <a href="publica-tu-queja.php" class="btn-add-opinion">Agregar tu opinión</a>
-                    </div>
-                </div>
+                @endforeach
+
             </div>
+
+
             <div class="others-business">
                 <div class="item-box">
                     <h2 class="title">Fuego de Vida España</h2>

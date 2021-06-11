@@ -51,17 +51,18 @@
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label for='company_site'>Sitio web *</label>
-                                                <input type='text' id='company_site' name='company_site' class='form-control required' maxlength="100"
+                                                <input type='text' id='company_site' name='company_site' class='form-control' maxlength="100"
                                                        value="{{isset($complaint) ? $complaint->company_site : ''}}">
                                             </div>
                                         </div>
 
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label>Empresas *</label>
                                                 <select class='form-control  required tdtextarea' id='busine_id' name='busine_id'>
                                                     @foreach($busines AS $item)
-                                                        <option value="{{$item->id}}">
+                                                        <option value="{{$item->id}}"
+                                                            {{ (isset($complaint) and $complaint->busine_id ==$item->id) ?'selected' : ''}}>
                                                             {{ucwords(mb_strtolower($item->name))}}
                                                         </option>
                                                     @endforeach
@@ -69,7 +70,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label>Estatus *</label>
                                                 <select class='form-control required tdtextarea' id='status' name='status'>
@@ -85,13 +86,30 @@
                                             </div>
                                         </div>
 
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label>Tipo *</label>
+                                                <select class='form-control required tdtextarea' id='type' name='type'>
+                                                    <option value="{{\App\Models\Complaint::TYPE_FOR_DESTACAR}}"
+                                                        {{ (isset($complaint) and $complaint->status==\App\Models\Complaint::TYPE_FOR_DESTACAR) ?'selected' : ''}}>
+                                                        {{\App\Models\Complaint::TYPE_FOR_DESTACAR}}
+                                                    </option>
+                                                    <option value={{\App\Models\Complaint::TYPE_PROMINENT}}
+                                                        {{ (isset($complaint) and $complaint->status==\App\Models\Complaint::TYPE_PROMINENT) ?'selected' : ''}}>
+                                                        {{\App\Models\Complaint::TYPE_PROMINENT}}
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+
 
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label>País *</label>
                                                 <select class='form-control  required tdtextarea' id='country_id' name='country_id'>
                                                     @foreach($countries AS $item)
-                                                        <option value="{{$item->id}}">
+                                                        <option value="{{$item->id}}"
+                                                            {{ (isset($complaint) and $complaint->country_id ==$item->id) ?'selected' : ''}}>
                                                             {{ucwords(mb_strtolower($item->name))}}
                                                         </option>
                                                     @endforeach
@@ -101,8 +119,8 @@
 
                                         <div class="col-sm-6">
                                             <div class="form-group">
-                                                <label for='name'>Estado *</label>
-                                                <input type='text' id='company_site' name='company_site' class='form-control required' maxlength="100"
+                                                <label for='state'>Estado *</label>
+                                                <input type='text' id='state' name='state' class='form-control required' maxlength="100"
                                                        value="{{isset($complaint) ? $complaint->state : ''}}">
                                             </div>
                                         </div>
@@ -122,8 +140,8 @@
                                 </div>
                                 <div class="card-footer">
                                     <p>Campos Requeridos (*)</p>
-                                    <button type="submit" class="btn btn-success">Guardar</button>
-                                    <a href="{{route('reports_complaint.index')}}" class="btn btn-secondary botones">Cancelar</a>
+                                    <button type="submit" class="btn btn-success btn-form">Guardar</button>
+                                    <a href="{{route('reports_complaint.index')}}" class="btn btn-secondary btn-form">Cancelar</a>
                                 </div>
                             </div>
                         </form>

@@ -8,11 +8,11 @@ Route::group(['prefix' => 'reports', 'middleware' => ['auth', 'role']], function
         ->name('reports_complaint.index')
         ->defaults('route', 'reports_complaint.index');
 
-    Route::get('complaints/edit/{id}', 'Backend\ReportComplaintController@edit')
+    Route::get('complaints/edit/{id}', 'Frontend\ComplaintController@edit')
         ->name('reports_complaint.edit')
         ->defaults('route', 'reports_complaint.index');
 
-    Route::match(['get', 'post'], 'complaints/update', 'Backend\ReportComplaintController@update')
+    Route::match(['get', 'post'], 'complaints/update', 'Frontend\ComplaintController@update')
         ->name('reports_complaint.update');
 
     Route::get('view-modal-complaint/{id}', 'Backend\ReportComplaintController@viewModalComplaint')

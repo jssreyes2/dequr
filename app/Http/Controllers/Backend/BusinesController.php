@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Busines;
+use App\Models\Category;
 use App\Repositories\BusinesRepository;
+use App\Repositories\CategoryRepository;
 use App\Services\PhotoImportServices;
 use Illuminate\Http\Request;
 
@@ -32,8 +34,11 @@ class BusinesController extends Controller
      */
     public function create($route = null)
     {
+        $categories = CategoryRepository::getCategories()->get();
+
         return view('backend.forms.forms_busines', [
-            'route' => $route
+            'route' => $route,
+            'categories' => $categories
         ]);
     }
 
@@ -76,9 +81,12 @@ class BusinesController extends Controller
     {
         $busines = Busines::where('id', '=', $id)->first();
 
+        $categories = CategoryRepository::getCategories()->get();
+
         return view('backend.forms.forms_busines', [
             'route' => $route,
-            'busines' => $busines
+            'busines' => $busines,
+            'categories' => $categories
         ]);
     }
 

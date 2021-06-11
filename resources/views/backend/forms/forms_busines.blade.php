@@ -58,7 +58,7 @@
 
 
                                     <div class="row">
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label for='name'>Nombre *</label>
                                                 <input type='text' id='name' name='name' class='form-control required' maxlength="100"
@@ -66,7 +66,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label>Estatus *</label>
                                                 <select class='form-control required tdtextarea' id='status' name='status'>
@@ -78,6 +78,23 @@
                                                         {{ (isset($busines) and $busines->status==\App\Models\Busines::STATUS_INACTIVE) ?'selected' : ''}}>
                                                         {{\App\Models\Busines::STATUS_INACTIVE}}
                                                     </option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label>Categoría *</label>
+                                                <select class='form-control required tdtextarea' id='category_id' name='category_id'>
+                                                    <option value="">
+                                                        Categorías
+                                                    </option>
+                                                    @foreach($categories AS $item)
+                                                        <option value="{{$item->id}}"
+                                                            {{ (isset($busines) and $busines->category_id==$item->id) ?'selected' : ''}}>
+                                                            {{ucwords(mb_strtolower($item->name))}}
+                                                        </option>
+                                                    @endforeach
                                                 </select>
                                             </div>
                                         </div>

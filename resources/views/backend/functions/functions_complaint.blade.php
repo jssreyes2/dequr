@@ -31,6 +31,11 @@
     })
 
 
+    function refresh() {
+        window.location.href = "{{ route('reports_complaint.index') }}";
+    }
+
+
     $("body").on('submit', '#form_complaint', function (event) {
 
         event.preventDefault()
@@ -43,7 +48,7 @@
             });
 
             $('#loading').show();
-            $('.botones').attr('disabled', true);
+            $('.btn-form').attr('disabled', true);
 
             var formData = new FormData(document.getElementById("form_complaint"));
 
@@ -73,7 +78,7 @@
                     }
 
                     setTimeout(function () {
-                        $('.botones').attr('disabled', false);
+                        $('.btn-form').attr('disabled', false);
                     }, 2000);
                 }
             });

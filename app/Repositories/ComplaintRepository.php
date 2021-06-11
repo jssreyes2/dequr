@@ -12,7 +12,8 @@ class ComplaintRepository extends Complaint
     {
         $query = Complaint::join('users', 'complaints.user_id', '=', 'users.id')
             ->join('business', 'complaints.busine_id', '=', 'business.id')
-            ->join('countries', 'complaints.country_id', '=', 'countries.id');
+            ->join('countries', 'complaints.country_id', '=', 'countries.id')
+            ->join('categories', 'business.category_id', '=', 'categories.id');
 
         $query->select('complaints.*', 'users.firstname', 'users.lastname', 'users.email', 'business.name As busine_name', 'countries.name AS country_name');
 
@@ -39,6 +40,22 @@ class ComplaintRepository extends Complaint
 
         if (isset($filter) and !empty($filter['id'])) {
             $query->where('complaints.id', '=', $filter['id']);
+        }
+
+        if (isset($filter) and !empty($filter['slug_complaint'])) {
+            $query->where('complaints.slug', '=', $filter['slug_complaint']);
+        }
+
+        if (isset($filter) and !empty($filter['type'])) {
+            $query->where('complaints.type', '=', $filter['type']);
+        }
+
+        if (isset($filter) and !empty($filter['category_slug'])) {
+            $query->where('categories.slug', '=', $filter['category_slug']);
+        }
+
+        if (isset($filter) and !empty($filter['user_id'])) {
+            $query->where('complaints.user_id', '=', $filter['user_id']);
         }
 
         $query->orderBy('complaints.created_at', 'DESC');

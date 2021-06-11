@@ -49,6 +49,20 @@
                                 <span class="btn-clear" title="Eliminar archivos">X</span>
                             </div>
                         </div>
+
+                        <div class="wrap-input">
+                            <select class='required tdtextarea' id='category_id' name='category_id'>
+                                <option value="">
+                                    Categorías
+                                </option>
+                                @foreach($categories AS $item)
+                                    <option value="{{$item->id}}">
+                                        {{ucwords(mb_strtolower($item->name))}}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+
                         <div class="flex">
                             <div class="wrap-input">
                                 <select class='required tdtextarea' id='country_id' name='country_id'>

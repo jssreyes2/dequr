@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Busines;
-use App\Models\Complaint;
 use App\Models\Country;
 use App\Repositories\BusinesRepository;
 use App\Repositories\ComplaintRepository;
@@ -40,28 +39,6 @@ class ReportComplaintController extends Controller
         ])->withErrors('Oops! no existe registro para mostrar');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id, $route = null)
-    {
-        $complaint = Complaint::where('id', '=', $id)->first();
-
-        $countries = Country::OrderBy('name', 'ASC')->get();
-
-        $busines = Busines::OrderBy('name', 'ASC')->get();
-
-        return view('backend.forms.forms_complaint', [
-            'route' => $route,
-            'complaint' => $complaint,
-            'countries' => $countries,
-            'busines' => $busines
-        ]);
-    }
-
 
     public function viewModalComplaint(Request $request)
     {
@@ -75,6 +52,8 @@ class ReportComplaintController extends Controller
             'complaints' => $complaints,
         ]);
     }
+
+
 
     public function downloadFileComplaint(Request $request)
     {

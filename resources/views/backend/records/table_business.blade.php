@@ -52,11 +52,11 @@
                                                         TODOS
                                                     </option>
                                                     <option value='{{\App\Models\Busines::STATUS_ACTIVE}}'
-                                                            {{(isset($filter['status']) and $filter['status']==\App\Models\Busines::STATUS_ACTIVE) ?'selected' : ''}}>
+                                                        {{(isset($filter['status']) and $filter['status']==\App\Models\Busines::STATUS_ACTIVE) ?'selected' : ''}}>
                                                         {{\App\Models\Busines::STATUS_ACTIVE}}
                                                     </option>
                                                     <option value='{{\App\Models\Busines::STATUS_INACTIVE}}'
-                                                            {{(isset($filter['status']) and $filter['status']==\App\Models\Busines::STATUS_INACTIVE)  ?'selected' : ''}}>
+                                                        {{(isset($filter['status']) and $filter['status']==\App\Models\Busines::STATUS_INACTIVE)  ?'selected' : ''}}>
                                                         {{\App\Models\Busines::STATUS_INACTIVE}}
                                                     </option>
                                                 </select>
@@ -88,6 +88,7 @@
                                     <tr>
                                         <th>Opciones</th>
                                         <th>Logo</th>
+                                        <th>Categoría</th>
                                         <th>Nombre</th>
                                         <th class="text-center">Estatus</th>
                                         <th class="text-center">Creado</th>
@@ -112,13 +113,15 @@
 
                                                 <td>
                                                     @if($items->logo)
-                                                    <img src="{{ asset('storage/photo_busines/' .$items->logo)}}" class="img-circle elevation-2" alt="{{$items->logo}}"
-                                                          style="width: 60px">
+                                                        <img src="{{ asset('storage/photo_busines/' .$items->logo)}}" class="img-circle elevation-2" alt="{{$items->logo}}"
+                                                             style="width: 60px">
                                                     @else
-                                                        <img src="{{ URL::asset('asset/frontend/assets/img/avatar-busines.png')}}" alt="avatar-busines.png"
+                                                        <img src="{{ URL::asset('asset/frontend/assets/img/avatar-busines.jpg')}}" alt="avatar-busines.png"
                                                              style="width: 60px">
                                                     @endif
                                                 </td>
+
+                                                <td>{{$items->category_name}}</td>
 
                                                 <td>{{$items->name}}</td>
 
