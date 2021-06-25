@@ -47,10 +47,17 @@
                                 </div>
                                 <div class="percentage">4.0%</div>
                             </div>
-                            <div class="opinions">Opiniones 150 | Bueno</div>
+                            <div class="opinions">Opiniones
+                                @if($item->total_business < 10)
+                                    {{'0'.$item->total_business}}
+                                @else
+                                    {{$item->total_business}}
+                                @endif
+                                | Bueno
+                            </div>
                         </div>
                         <div class="buttons">
-                            <a href="" class="btn-see">Ver empresa</a>
+                            <a href="{{url('company/'.$item->slug)}}" class="btn-see">Ver empresa</a>
                             <a href="{{route('post_complaint.index')}}" class="btn-add-opinion">Agregar tu opinión</a>
                         </div>
                     </div>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Complaint;
 use App\Repositories\ComplaintRepository;
 use Illuminate\Http\Request;
@@ -23,11 +24,14 @@ class HomeController extends Controller
 
         $recentComplaints = ComplaintRepository::getComplaint(['status' => Complaint::COMPLAINT_ACTIVE])->paginate(5);
 
+        $categories = Category::where('status', '=', Category::STATUS_ACTIVE)->OrderBy('name', 'ASC')->get();
+
         return view('frontend.index', [
             'user' => Auth::user(),
             'complaints' => $complaints,
             'complaintsPromient' => $complaintsPromient,
-            'recentComplaints' => $recentComplaints
+            'recentComplaints' => $recentComplaints,
+            'categories' => $categories
         ]);
     }
 }

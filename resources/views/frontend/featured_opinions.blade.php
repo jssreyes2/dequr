@@ -16,7 +16,7 @@
                             @endif
 
                         </div>
-                        <a href="{{route('Company.show')}}">{{ucwords(mb_strtolower($item->busine_name))}}</a>
+                        <a href="{{url('company/'.$item->busine_slug)}}">{{ucwords(mb_strtolower($item->busine_name))}}</a>
                     </div>
                 </div>
             @endforeach

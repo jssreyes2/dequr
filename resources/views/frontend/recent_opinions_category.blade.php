@@ -18,7 +18,7 @@
                 </div>
 
                 <div class="copy" style="width: 1500px;">
-                    <a href="{{url('complaints/'.$item->slug)}}" class="name-business">{{ucwords(mb_strtolower($item->busine_name))}}</a>
+                    <a href="{{url('company/'.$item->busine_slug)}}" class="name-business">{{ucwords(mb_strtolower($item->busine_name))}}</a>
                         <div class="date-location">
                             <span class="date">{{$date->toFormattedDateString()}}</span>
                             <span class="location">{{ucwords(mb_strtolower($item->country_name))}} - {{ucwords(mb_strtolower($item->state))}}</span>

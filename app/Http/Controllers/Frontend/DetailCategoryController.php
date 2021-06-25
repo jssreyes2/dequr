@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
-use App\Models\Busines;
 use App\Repositories\CategoryRepository;
+use App\Repositories\ComplaintRepository;
 
 class DetailCategoryController extends Controller
 {
@@ -12,7 +12,7 @@ class DetailCategoryController extends Controller
     {
         $category = CategoryRepository::getCategories(['slug' => $slug])->first();
 
-        $business = Busines::where('category_id', '=', $category->id)->get();
+        $business = ComplaintRepository::getComplaintBusiness(['category_id' => $category->id])->get();
 
         return view('frontend.detail-category', ['category' => $category, 'business' => $business]);
     }

@@ -7,9 +7,9 @@ use App\Models\Busines;
 use App\Models\Country;
 use App\Repositories\BusinesRepository;
 use App\Repositories\ComplaintRepository;
+use App\Services\PhotoImportServices;
 use Illuminate\Http\Request;
 use File;
-use ZipArchive;
 
 class ReportComplaintController extends Controller
 {
@@ -55,10 +55,10 @@ class ReportComplaintController extends Controller
 
 
 
-    public function downloadFileComplaint(Request $request)
+    public function downloadFileComplaint($id)
     {
         $filter = [
-            'id' => $request->get('id'),
+            'id' => $id,
         ];
 
         $complaints = ComplaintRepository::getComplaint($filter)->first();
@@ -66,21 +66,8 @@ class ReportComplaintController extends Controller
         $arrfiles = json_decode($complaints->file, true);
 
         if ($arrfiles) {
-
-            $zip = new \ZipArchive();
-            $fileName = $complaints->slug . '.zip';
-
-            if ($zip->open(storage_path('app' . DIRECTORY_SEPARATOR . 'public' . DIRECTORY_SEPARATOR . 'complaint_files' . DIRECTORY_SEPARATOR . $complaints->id . DIRECTORY_SEPARATOR . $fileName), ZipArchive::CREATE) === TRUE) {
-                $files = File::files(storage_path('app' . DIRECTORY_SEPARATOR . 'public' . DIRECTORY_SEPARATOR . 'complaint_files' . DIRECTORY_SEPARATOR . $complaints->id));
-                foreach ($files as $key => $value) {
-                    $relativeNameInZipFile = basename($value);
-                    $zip->addFile($value, $relativeNameInZipFile);
-                }
-
-                $zip->close();
-            }
-
-            return response()->download(storage_path('app' . DIRECTORY_SEPARATOR . 'public' . DIRECTORY_SEPARATOR . 'complaint_files' . DIRECTORY_SEPARATOR . $complaints->id . DIRECTORY_SEPARATOR . $fileName));
+            $photoImportServices= new PhotoImportServices();
+            return  $photoImportServices->downloadFileComplaint($complaints);
         }
 
         return redirect()->route('reports_complaint.index');

@@ -33,6 +33,12 @@ class PostComplaintController extends Controller
         }
 
         $busine = $request->busine_id;
+
+        if(empty($busine)){
+            return response()->json(['status' => 'fail', 'message' => 'Seleccione o introduzca la empresas']);
+        }
+
+
         if (!is_numeric($request->busine_id)) {
             $dataBusine = Busines::saveBusineComplaint($request);
             $busine = $dataBusine->id;

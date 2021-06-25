@@ -3,7 +3,7 @@
     <div class="breadcrumbs">
         <a href="{{route('principal')}}">Inicio »</a>
         <a href="{{route('company.index')}}">Empresas »</a>
-        <a href="{{route('Company.show')}}">{{ucfirst(mb_strtolower($complaint->busine_name))}} »</a>
+        <a href="{{url('company/'.$complaint->busine_slug)}}">{{ucfirst(mb_strtolower($complaint->busine_name))}} »</a>
         <span>{{ucfirst(mb_strtolower($complaint->title))}}</span>
     </div>
 
@@ -18,8 +18,17 @@
                 </div>
                 <div class="post-info">
                     <div class="user">
-                        <div class="avatar">GQ</div>
-                        <span class="name">@guillequinterot</span>
+                        <div class="avatar">
+
+                            @if(!empty($complaint->avatar))
+                                <img src="{{ asset('storage/photo_users/' .$complaint->avatar)}}"
+                                     alt="{{ucwords(mb_strtolower($complaint->firstname.' '.$complaint->lastname))}}" id="imgPreview" class="avatar">
+                            @else
+                                <img src="{{ asset('asset/frontend/assets/img/robot-dequr.svg')}}" alt="dequr" id="imgPreview" class="avatar">
+                            @endif
+
+                        </div>
+                        <span class="name">{{'@'.ucwords(mb_strtolower($complaint->firstname.' '.$complaint->lastname))}}</span>
                     </div>
                     <div class="date-location">
                         <span class="date">{{$date}}</span>
@@ -28,60 +37,37 @@
                 </div>
                 <div class="tabs-files">
                     <ul class="tab-buttons">
-                        <span class="btn archivo">Ver archivos</span>
+                        <span class="btn archivo {{($complaint->file) ? 'download-file-complaint': ''}}" data-id="{{$complaint->id}}">Ver archivos</span>
                         <span class="btn imagen">Ver imágen</span>
-                        {{--                        <span class="btn audio">Oir audio</span>--}}
-                        {{--                        <span class="btn video">Ver vídeo</span>--}}
                     </ul>
                     <div class="tab-content">
+
                         <div class="tab-item">
-                            <div class="files-grid">
-                                <a href="{{ asset('asset/frontend/assets/files/test.docx')}}" donwload>
-                                    Prueba 1.docx
-                                </a>
-                                <a href="{{ asset('asset/frontend/assets/files/test.pdf')}}" donwload>
-                                    Prueba 2.pdf
-                                </a>
+                            <div class="files-grid" style="color:red!important">
+                                {{(!$complaint->file) ? 'No existe archivo para descargar': ''}}
                             </div>
                         </div>
+
                         <div class="tab-item">
                             <div class="images-grid">
-                                <a href="https://picsum.photos/800/800" data-lightbox="img-gallery">
-                                    <img src="https://picsum.photos/800/800" alt="img">
-                                </a>
-                                <a href="https://picsum.photos/900/700" data-lightbox="img-gallery">
-                                    <img src="https://picsum.photos/900/700" alt="img">
-                                </a>
-                                <a href="https://picsum.photos/600/800" data-lightbox="img-gallery">
-                                    <img src="https://picsum.photos/600/800" alt="img">
-                                </a>
+                                @if(isset($arrfiles))
+                                    @foreach($arrfiles as $key => $value)
+
+                                        @if (file_exists( $urlImg=storage_path('app' . DIRECTORY_SEPARATOR . 'public' . DIRECTORY_SEPARATOR . 'complaint_files' . DIRECTORY_SEPARATOR .$complaint->id. DIRECTORY_SEPARATOR . $value)))
+
+                                            <a href="{{ asset('storage/complaint_files/'.$complaint->id.'/'.$value)}}" data-lightbox="img-gallery">
+                                                <img src="{{ asset('storage/complaint_files/'.$complaint->id.'/'.$value)}}" alt="img">
+                                            </a>
+                                        @endif
+                                    @endforeach
+                                @endif
                             </div>
                         </div>
-                        {{--                        <div class="tab-item">--}}
-                        {{--                            <div class="audios-grid">--}}
-                        {{--                                <audio controls>--}}
-                        {{--                                    <source src="{{ asset('asset/frontend/assets/audio/audio1.mp3')}}" type="audio/mpeg">--}}
-                        {{--                                </audio>--}}
-                        {{--                                <audio controls>--}}
-                        {{--                                    <source src="{{ asset('asset/frontend/assets/audio/audio2.mp3')}}" type="audio/mpeg">--}}
-                        {{--                                </audio>--}}
-                        {{--                            </div>--}}
-                        {{--                        </div>--}}
-                        {{--                        <div class="tab-item">--}}
-                        {{--                            <div class="videos-grid">--}}
-                        {{--                                <video controls>--}}
-                        {{--                                    <source src="{{ asset('asset/frontend/assets/video/video1.mp4')}}" type="video/mp4">--}}
-                        {{--                                </video>--}}
-                        {{--                                <video controls>--}}
-                        {{--                                    <source src="{{ asset('asset/frontend/assets/video/video2.mp4')}}" type="video/mp4">--}}
-                        {{--                                </video>--}}
-                        {{--                                <video controls>--}}
-                        {{--                                    <source src="{{ asset('asset/frontend/assets/video/video3.mp4')}}" type="video/mp4">--}}
-                        {{--                                </video>--}}
-                        {{--                            </div>--}}
-                        {{--                        </div>--}}
+
                     </div>
                 </div>
+
+
                 <div class="commentary">
                     <div class="commentary__header">
                         <h3 class="title">Agregar tu opinion</h3>
@@ -111,6 +97,7 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="commentary__body">
                         <form id="comment">
                             <input type="hidden" id="id" name="id" value="{{$complaint->id}}">
@@ -123,11 +110,10 @@
                             <button type="submit" class="btn-submit">Publicar</button>
                         </form>
                     </div>
+
                     <div id="loading-comment" style="display: none;">
                         <img src='{{URL::asset('asset/backend/img/loadingfrm.gif')}}' style="float: right"/>
                     </div>
-
-
                 </div>
 
                 <div class="comments">
@@ -189,7 +175,7 @@
                             </div>
                             <div class="percentage">4.0%</div>
                         </div>
-{{--                        <a href="{{route('Company.show')}}" class="btn-see">Ver empresa</a>--}}
+{{--                        <a href="{{route('company.show')}}" class="btn-see">Ver empresa</a>--}}
                     </div>
                     <div class="numbers">
                         <div class="number-views">
@@ -221,21 +207,6 @@
                 $(".share .social").toggleClass('active');
             });
 
-            // JS para mostrar imagen cuando se cargue al comentario
-            $('.commentary__body .input-file').change(function (e) {
-                for (var i = 0; i < e.target.files.length; i++) {
-                    $('.img-file').append('<div class="img"><i title="' + e.target.files[i].name.split('.')[1] + '"></i></div>');
-                    $('.commentary__body .btn-clear').addClass('active');
-
-                }
-            });
-
-
-            $('.commentary__body .btn-clear').on('click', function () {
-                document.querySelector(".commentary__body .input-file").value = "";
-                $(".img-file .img").remove();
-                $(this).removeClass("active");
-            });
 
             // Tabs de archivos adjuntos
             $('.tabs-files .tab-buttons span').click(function (g) {
@@ -253,6 +224,13 @@
             });
         });
 
+
+        $(".download-file-complaint").on("click", function () {
+            var dataId = $(this).attr("data-id");
+            var url = '{{ route("download_file_complaint", ":id") }}';
+            url = url.replace(':id', dataId);
+            window.location.href = url;
+        });
 
         $("body").on('submit', '#comment', function (event) {
 

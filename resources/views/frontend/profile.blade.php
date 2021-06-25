@@ -90,6 +90,26 @@
 
         </div>
     </main>
+
+    <!-- Modal inicio de sesión -->
+    <div class="modal-login">  <!-- Asignar clase "active" a este div para mostrar la modal -->
+        <div class="content">
+            <div class="box">
+                <span class="btn-close">X</span>
+
+                <h2 class="title">Eliminar cuenta en DEQUR</h2>
+
+                <div class="wrap-login">
+                   Estas seguro de eliminar tu cuenta ?
+                    <button type="submit" class="btn-save">SI, CERRAR</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
 @endsection
 
 @section('script')
@@ -172,6 +192,10 @@
         // Editar campos del form
        $(".user-data .btn-edit").click(function () {
            $( "#form_user_profile" ).submit();
+        });
+
+       $(".btn-delete-account").click(function () {
+           $(".modal-login").addClass("active");
         });
 
 

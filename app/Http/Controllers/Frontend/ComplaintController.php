@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Busines;
-use App\Models\Category;
 use App\Models\Comment;
 use App\Models\Complaint;
 use App\Models\Country;
@@ -15,10 +14,14 @@ use Illuminate\Http\Request;
 
 class ComplaintController extends Controller
 {
-    public function index($slug)
+    public function index(request $request, $slug=null)
     {
+        $searchComplaint=null;
+        if(!$slug){
+            $searchComplaint = str_slug($request->search, '-');
+        }
 
-        $complaint = ComplaintRepository::getComplaint(['slug_complaint' => $slug])->first();
+        $complaint = ComplaintRepository::getComplaint(['slug_complaint' => $slug, 'search_complaint' => $searchComplaint])->first();
 
         if(empty($complaint)){
             return redirect()->route('principal');
@@ -30,11 +33,15 @@ class ComplaintController extends Controller
 
         $recentComplaints = ComplaintRepository::getComplaint(['status' => Complaint::COMPLAINT_ACTIVE])->paginate(5);
 
+        $arrfiles = json_decode($complaint->file_img, true);
+
         return view('frontend.complaints', [
             'complaint' =>$complaint,
             'date' => $date->toFormattedDateString(),
             'comments' => $comments,
-            'recentComplaints' => $recentComplaints
+            'search' => mb_strtolower($searchComplaint),
+            'recentComplaints' => $recentComplaints,
+            'arrfiles' => $arrfiles
         ]);
     }
 

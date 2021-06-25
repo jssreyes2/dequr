@@ -5,7 +5,9 @@ namespace App\Services;
 use App\Models\Busines;
 use App\Models\Complaint;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use Intervention\Image\Facades\Image;
+use ZipArchive;
 
 class PhotoImportServices
 {
@@ -86,6 +88,7 @@ class PhotoImportServices
         }
 
         $i = 1;
+        $nameDocumentJsonImg = [];
         $nameDocumentJson = [];
 
         foreach ($files as $item) {
@@ -93,9 +96,10 @@ class PhotoImportServices
             $ext = strtolower(pathinfo($item->getClientOriginalName(), PATHINFO_EXTENSION));
             $nameDocument = $i . '-' . $complaint->slug . '.' . $ext;
 
-            $nameDocumentJson[] .= $nameDocument;
-
             if ($ext == 'jpg' || $ext == 'jpeg' || $ext == 'png') {
+
+                $nameDocumentJsonImg[] .= $nameDocument;
+
                 $image = Image::make($item->getRealPath());
 
                 $image->resize(config('image.logo_profile_x'), config('image.logo_profile_y'), null, function ($constraint) {
@@ -108,15 +112,28 @@ class PhotoImportServices
                 $image->save($fileNew);
             } else {
 
+                $nameDocumentJson[] .= $nameDocument;
+
                 $fileNew = storage_path('app' . DIRECTORY_SEPARATOR . 'public' . DIRECTORY_SEPARATOR . 'complaint_files' . DIRECTORY_SEPARATOR . $complaint->id);
                 $item->move($fileNew, $nameDocument);
+
+                $complaint->file = json_encode($nameDocumentJson);
+                $complaint->save();
             }
 
             $i++;
         }
 
-        $complaint->file = json_encode($nameDocumentJson);
-        $complaint->save();
+        if ($nameDocumentJsonImg) {
+            $complaint->file_img = json_encode($nameDocumentJsonImg);
+            $complaint->save();
+        }
+
+        if ($nameDocumentJson) {
+            $complaint->file = json_encode($nameDocumentJson);
+            $complaint->save();
+        }
+
     }
 
 
@@ -128,6 +145,27 @@ class PhotoImportServices
                 unlink($filePrevious);
             }
         }
+    }
+
+
+    public function downloadFileComplaint(Complaint $complaints)
+    {
+        $zip = new \ZipArchive();
+        $fileName = $complaints->slug . '.zip';
+
+        if ($zip->open(storage_path('app' . DIRECTORY_SEPARATOR . 'public' . DIRECTORY_SEPARATOR . 'complaint_files' . DIRECTORY_SEPARATOR . $complaints->id . DIRECTORY_SEPARATOR . $fileName), ZipArchive::CREATE) === TRUE) {
+            $files = File::files(storage_path('app' . DIRECTORY_SEPARATOR . 'public' . DIRECTORY_SEPARATOR . 'complaint_files' . DIRECTORY_SEPARATOR . $complaints->id));
+            foreach ($files as $key => $value) {
+                $relativeNameInZipFile = basename($value);
+                $zip->addFile($value, $relativeNameInZipFile);
+            }
+
+            $zip->close();
+        }
+
+        return response()->download(storage_path('app' . DIRECTORY_SEPARATOR . 'public' . DIRECTORY_SEPARATOR . 'complaint_files' . DIRECTORY_SEPARATOR . $complaints->id . DIRECTORY_SEPARATOR . $fileName));
+
+
     }
 
 }

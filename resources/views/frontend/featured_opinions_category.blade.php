@@ -14,7 +14,7 @@
                                 <img src="{{ asset('asset/frontend/assets/img/avatar-busines.jpg')}}" alt="{{ucwords(mb_strtolower($item->busine_name))}}">
                             @endif
                         </div>
-                        <a href="">{{ucwords(mb_strtolower($item->busine_name))}}</a>
+                        <a href="{{url('company/'.$item->busine_slug)}}">{{ucwords(mb_strtolower($item->busine_name))}}</a>
                     </div>
                 </div>
             @endforeach

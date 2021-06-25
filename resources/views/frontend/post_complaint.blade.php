@@ -21,7 +21,7 @@
                         </div>
 
                         <div class="wrap-input busine_id">
-                            <select class='required tdtextarea' id='busine_id' name='busine_id'>
+                            <select class='required tdtextarea select-multiple' id='busine_id' name='busine_id'>
                                 <option value="">
                                     Empresas
                                 </option>
@@ -39,7 +39,9 @@
 
 
                         <div class="wrap-input">
-                            <textarea name="description" id="description" class="required tdtextarea" placeholder="Escriba se queja con toda la información posible"></textarea>
+                            <textarea name="description" id="description" class="required tdtextarea" placeholder="Escriba se queja con toda la información posible"
+                                      onkeyup="countChars(this);"></textarea>
+                            <p id="charNum">0 characters</p>
                         </div>
                         <div class="wrap-input files">
                             <div class="icons"></div>
@@ -149,6 +151,21 @@
 
 @section('script')
     <script type="application/javascript">
+
+        $(document).ready(function () {
+            $('.select-multiple').select2();
+        });
+
+        function countChars(obj) {
+            document.getElementById("charNum").innerHTML = obj.value.length + ' characters';
+
+            if (obj.value.length <= 400) {
+                $('#charNum').attr('style', 'color:red');
+            }else{
+                $('#charNum').attr('style', 'color:green');
+            }
+        }
+
 
         //JS para modal de inicio de sesión
         $(".modal-login .btn-close").on("click", function () {
@@ -296,7 +313,7 @@
                         $('#loading_login').hide();
 
                         if (respuesta.status == 'success') {
-                            $( "#form_queja" ).submit();
+                            $("#form_queja").submit();
                             $(".modal-login").removeClass("active");
                         }
 

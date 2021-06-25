@@ -14,12 +14,15 @@ class ComplaintRepository extends Complaint
             ->join('business', 'complaints.busine_id', '=', 'business.id')
             ->join('countries', 'complaints.country_id', '=', 'countries.id')
             ->join('categories', 'business.category_id', '=', 'categories.id');
-
-        $query->select('complaints.*', 'users.firstname', 'users.lastname', 'users.email', 'business.name As busine_name', 'countries.name AS country_name');
+        $query->select('complaints.*', 'users.firstname', 'users.lastname', 'users.email', 'users.avatar', 'business.name AS busine_name', 'business.logo AS logo', 'business.slug AS busine_slug', 'countries.name AS country_name');
 
 
         if (isset($filter) and !empty($filter['search'])) {
             $query->where(DB::raw("CONCAT_WS(' ', complaints.title, users.firstname, users.lastname, business.name, countries.name) "), 'LIKE', "%" . $filter['search'] . "%");
+        }
+
+        if (isset($filter) and !empty($filter['search_complaint'])) {
+            $query->where(DB::raw("CONCAT_WS(' ', complaints.title) "), 'LIKE', "%" . $filter['search_complaint'] . "%");
         }
 
         if (isset($filter) and !empty($filter['status'])) {
@@ -62,4 +65,20 @@ class ComplaintRepository extends Complaint
 
         return $query;
     }
+
+
+    public static function getComplaintBusiness($filter = null)
+    {
+        $query = Complaint::join('business', 'complaints.busine_id', '=', 'business.id')
+            ->select(DB::raw('COUNT(complaints.busine_id) as total_business'), 'business.*');
+
+        if (isset($filter['category_id'])) {
+            $query->where('business.category_id', '=', $filter['category_id']);
+        }
+
+        $query->groupBy('business.id');
+
+        return $query;
+    }
+
 }
