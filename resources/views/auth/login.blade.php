@@ -1,7 +1,7 @@
 @extends('frontend.layouts.master', ['class_body' => 'login'])
 @section('content')
     <div class="breadcrumbs">
-        <a href="#">Inicio »</a>
+        <a href="{{route('principal')}}">Inicio »</a>
         <span>Iniciar sesión</span>
     </div>
 

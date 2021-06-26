@@ -91,23 +91,28 @@
         </div>
     </main>
 
+
+
     <!-- Modal inicio de sesión -->
     <div class="modal-login">  <!-- Asignar clase "active" a este div para mostrar la modal -->
         <div class="content">
             <div class="box">
                 <span class="btn-close">X</span>
 
-                <h2 class="title">Eliminar cuenta en DEQUR</h2>
+                <h2 class="title">Estas segur@ de eliminar la cuenta en<img src="{{asset('asset/frontend/assets/img/logo.svg')}}" alt="dequr"></h2>
 
-                <div class="wrap-login">
-                   Estas seguro de eliminar tu cuenta ?
-                    <button type="submit" class="btn-save">SI, CERRAR</button>
+                <div class="wrap-login text-center">
+                    <form role="form" id='form_login' name='form_login'>
+                        <img src="{{asset('asset/frontend/assets/img/cerrar_cuenta.png')}}" alt="cerrar cuenta" style="width:30%; margin: auto">
+                        <button class="btn-login btn-close-account">Si, Cerrar Cuenta</button>
+                        <div class="input-wrap" id="loading-close-account" style="display: none;">
+                            <img src='{{URL::asset('asset/backend/img/loadingfrm.gif')}}' style="margin: auto;"/>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
-
-
 
 
 @endsection
@@ -147,7 +152,7 @@
         });
 
         @if(isset($user) and !empty($user->avatar))
-            avatar();
+        avatar();
         @endif
 
         // Cargar imagen del perfil
@@ -161,7 +166,7 @@
             }
         }
 
-        function avatar () {
+        function avatar() {
             var imgControlName = "#imgPreview";
             readURL("{{asset('storage/photo_users/' .$user->avatar)}}", imgControlName);
             //$('.btn-remove-image').addClass('active');
@@ -190,17 +195,21 @@
         });*/
 
         // Editar campos del form
-       $(".user-data .btn-edit").click(function () {
-           $( "#form_user_profile" ).submit();
+        $(".user-data .btn-edit").click(function () {
+            $("#form_user_profile").submit();
         });
 
-       $(".btn-delete-account").click(function () {
-           $(".modal-login").addClass("active");
+        $(".btn-delete-account").click(function () {
+            $(".modal-login").addClass("active");
         });
 
 
         $(".user-data .btn-save").click(function () {
-            $( "#form_user_profile" ).submit();
+            $("#form_user_profile").submit();
+        });
+
+        $(".btn-close").click(function () {
+            location.reload();
         });
 
 
@@ -248,7 +257,6 @@
         });
 
 
-
         $("body").on('submit', '#form_user_password', function (event) {
 
             event.preventDefault()
@@ -280,7 +288,7 @@
 
                         if (respuesta.status == 'success') {
                             setTimeout(function () {
-                                refresh();
+                                location.reload();
                             }, 2000);
                         }
 
@@ -291,5 +299,13 @@
                 });
             }
         });
+
+
+        $(".btn-close-account").click(function () {
+
+            $('#loading-close-account').show();
+            $.post( "{{route('profile.closeAccount')}}");
+        });
+
     </script>
 @endsection

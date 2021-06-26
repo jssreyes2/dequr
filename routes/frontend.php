@@ -54,6 +54,8 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::match(['get', 'post'], 'update-password', 'Frontend\ProfileController@updatePassword')->name('profile.updatePassword');
 
+    Route::match(['get', 'post'], 'close-account', 'Frontend\ProfileController@closeAccount')->name('profile.closeAccount');
+
     Route::get('notifications', 'Frontend\NotificationController@index')->name('Notification.index');
 
     Route::get('comments', 'Frontend\CommentController@index')->name('comment.index');

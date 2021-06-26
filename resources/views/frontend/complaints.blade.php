@@ -151,9 +151,9 @@
                                 <div class="comment__body">
                                     <p>{!! $items->comment !!}</p>
                                 </div>
-                                <div class="comment__answer">
-                                    Responder
-                                </div>
+{{--                                <div class="comment__answer">--}}
+{{--                                    Responder--}}
+{{--                                </div>--}}
                             </div>
                         @endforeach
                     @endif

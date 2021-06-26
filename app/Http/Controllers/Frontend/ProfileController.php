@@ -58,4 +58,13 @@ class ProfileController extends Controller
 
         return response()->json(['status' => 'success', 'alert' => config('app.alert_success')]);
     }
+
+
+    public function closeAccount()
+    {
+
+        User::deleteUser(Auth::user()->id);
+
+        return redirect()->route('logout');
+    }
 }
