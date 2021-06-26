@@ -92,4 +92,15 @@ class Busines extends Model
         return $busines;
     }
 
+    public static function numberOfVisits($id)
+    {
+        $obj = new self();
+        $obj = $obj->find($id);
+
+        $numberOfVisits=self::where('id', '=', $id)->sum('number_of_visit');
+
+        $obj->number_of_visit=$numberOfVisits + 1;
+        $obj->save();
+    }
+
 }

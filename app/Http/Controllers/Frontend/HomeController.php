@@ -16,9 +16,18 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
-        $complaints = ComplaintRepository::getComplaint(['status' => Complaint::COMPLAINT_ACTIVE, 'type' => Complaint::TYPE_FOR_DESTACAR])->paginate(4);
+        $searchComplaint=null;
+        if($request->search){
+            $searchComplaint = strtolower($request->search);
+        }
+
+        $complaints = ComplaintRepository::getComplaint([
+            'status' => Complaint::COMPLAINT_ACTIVE,
+            'type' => Complaint::TYPE_FOR_DESTACAR,
+            'search_complaint' => $searchComplaint
+        ])->paginate(10);
 
         $complaintsPromient = ComplaintRepository::getComplaint(['status' => Complaint::COMPLAINT_ACTIVE, 'type' => Complaint::TYPE_PROMINENT])->paginate(10);
 

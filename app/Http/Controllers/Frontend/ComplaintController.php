@@ -14,14 +14,10 @@ use Illuminate\Http\Request;
 
 class ComplaintController extends Controller
 {
-    public function index(request $request, $slug=null)
+    public function index($slug=null)
     {
-        $searchComplaint=null;
-        if(!$slug){
-            $searchComplaint = str_slug($request->search, '-');
-        }
 
-        $complaint = ComplaintRepository::getComplaint(['slug_complaint' => $slug, 'search_complaint' => $searchComplaint])->first();
+        $complaint = ComplaintRepository::getComplaint(['slug_complaint' => $slug])->first();
 
         if(empty($complaint)){
             return redirect()->route('principal');
@@ -35,13 +31,15 @@ class ComplaintController extends Controller
 
         $arrfiles = json_decode($complaint->file_img, true);
 
+        $complaintstotal = ComplaintRepository::totalComment($complaint->business_id);
+
         return view('frontend.complaints', [
             'complaint' =>$complaint,
             'date' => $date->toFormattedDateString(),
             'comments' => $comments,
-            'search' => mb_strtolower($searchComplaint),
             'recentComplaints' => $recentComplaints,
-            'arrfiles' => $arrfiles
+            'arrfiles' => $arrfiles,
+            'complaintstotal' => $complaintstotal
         ]);
     }
 

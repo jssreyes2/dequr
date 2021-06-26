@@ -116,7 +116,7 @@
                                                         <img src="{{ asset('storage/photo_busines/' .$items->logo)}}" class="img-circle elevation-2" alt="{{$items->logo}}"
                                                              style="width: 60px">
                                                     @else
-                                                        <img src="{{ URL::asset('asset/frontend/assets/img/avatar-busines.jpg')}}" alt="avatar-busines.png"
+                                                        <img src="{{ URL::asset('asset/frontend/assets/img/avatar-busines.png')}}" alt="avatar-busines.png"
                                                              style="width: 60px">
                                                     @endif
                                                 </td>

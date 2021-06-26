@@ -7,6 +7,7 @@ use App\Repositories\ComplaintRepository;
 use App\Services\PhotoImportServices;
 use Illuminate\Http\Request;
 use App\Models\Complaint;
+use App\Models\Busines;
 
 class CompanyController extends Controller
 {
@@ -23,8 +24,10 @@ class CompanyController extends Controller
 
         $complaintstotal = 0;
         if (isset($complaints[0]['busine_id'])) {
-            $complaintstotal = Complaint::where('busine_id', '=', $complaints[0]['busine_id'])->count('busine_id');
+            $complaintstotal = ComplaintRepository::totalComment($complaints[0]['busine_id']);
+            Busines::numberOfVisits($complaints[0]['busine_id']);
         }
+
 
         return view('frontend.company', ['complaints' => $complaints, 'complaintstotal' => $complaintstotal]);
     }

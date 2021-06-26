@@ -15,7 +15,7 @@
                         <img src="{{ asset('storage/photo_busines/' .$complaints[0]['logo'])}}" alt="{{ucwords(mb_strtolower($complaints[0]['busine_name']))}}"
                              style="width:auto!important;">
                     @else
-                        <img src="{{ asset('asset/frontend/assets/img/avatar-busines.jpg')}}" alt="{{ucwords(mb_strtolower($complaints[0]['busine_name']))}}"                                               style="width:auto!important;">
+                        <img src="{{ asset('asset/frontend/assets/img/avatar-busines.png')}}" alt="{{ucwords(mb_strtolower($complaints[0]['busine_name']))}}"                                               style="width:auto!important;">
                     @endif
 
 

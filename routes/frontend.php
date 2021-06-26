@@ -18,6 +18,8 @@ Route::get('/home', 'Frontend\HomeController@index')->name('home');
 
 Route::get('/', 'Frontend\HomeController@index')->name('principal');
 
+Route::match(['get', 'post'], 'search-complaint', 'Frontend\HomeController@index')->name('search_complaint');
+
 Route::get('category', 'Frontend\CategoryController@index')->name('category');
 
 Route::match(['get', 'post'], 'detail-category/{slug}', 'Frontend\DetailCategoryController@index')->name('detail_category');
@@ -31,8 +33,6 @@ Route::get('companies', 'Frontend\CompanyController@index')->name('company.index
 Route::get('company/{slug}', 'Frontend\CompanyController@show')->name('company.show');
 
 Route::match(['get', 'post'], 'complaints/{slug}', 'Frontend\ComplaintController@index')->name('complaint.index');
-
-Route::match(['get', 'post'], 'search-complaint', 'Frontend\ComplaintController@index')->name('search_complaint');
 
 Route::get('post-complaint', 'Frontend\PostComplaintController@index')->name('post_complaint.index');
 

@@ -12,7 +12,7 @@
                             @if(!empty($item->logo))
                                 <img src="{{ asset('storage/photo_busines/' .$item->logo)}}" alt="{{ucwords(mb_strtolower($item->busine_name))}}">
                             @else
-                                <img src="{{ asset('asset/frontend/assets/img/avatar-busines.jpg')}}" alt="{{ucwords(mb_strtolower($item->busine_name))}}">
+                                <img src="{{ asset('asset/frontend/assets/img/avatar-busines.png')}}" alt="{{ucwords(mb_strtolower($item->busine_name))}}">
                             @endif
 
                         </div>

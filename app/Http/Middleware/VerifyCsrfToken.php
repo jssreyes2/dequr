@@ -16,5 +16,6 @@ class VerifyCsrfToken extends Middleware
         'updatePosition',
         'update_position',
         'search-complaint',
+        'detail-category',
     ];
 }

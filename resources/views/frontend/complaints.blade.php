@@ -128,7 +128,14 @@
                             <div class="comment">
                                 <div class="comment__header">
                                     <div class="user">
-                                        <div class="avatar">GQ</div>
+
+                                        @if(!empty($items->user_id))
+                                            <img src="{{ asset('storage/photo_users/' .$items->avatar)}}"
+                                                 alt="{{ucwords(mb_strtolower($items->firstname.' '.$items->lastname))}}" id="imgPreview" class="avatar">
+                                        @else
+                                            <img src="{{ asset('asset/frontend/assets/img/avatar-user.png')}}" alt="dequr" id="imgPreview" class="avatar">
+                                        @endif
+
                                         <span class="name">@
                                             @if($items->user_id)
                                                 {{ucwords(mb_strtolower($items->firstname.' '.$items->lastname))}}
@@ -158,7 +165,7 @@
                     @if(!empty($complaint->logo))
                         <img src="{{ asset('storage/photo_busines/' .$complaint->logo)}}" alt="{{ucwords(mb_strtolower($complaint->busine_name))}}">
                     @else
-                        <img src="{{ asset('asset/frontend/assets/img/avatar-busines.jpg')}}" alt="{{ucwords(mb_strtolower($complaint->busine_name))}}">
+                        <img src="{{ asset('asset/frontend/assets/img/avatar-busines.png')}}" alt="{{ucwords(mb_strtolower($complaint->busine_name))}}">
                     @endif
 
                 </div>
@@ -179,10 +186,10 @@
                     </div>
                     <div class="numbers">
                         <div class="number-views">
-                            1.846.960 vistas
+                            @if($complaint->number_of_visit < 10) {{'0'.$complaint->number_of_visit}} @else {{$complaint->number_of_visit}} @endif vistas
                         </div>
                         <div class="number-comments">
-                            1.846.960 comentarios
+                            @if($complaintstotal < 10) {{'0'.$complaintstotal}} @else {{$complaintstotal}} @endif comentarios
                         </div>
                     </div>
                 </div>

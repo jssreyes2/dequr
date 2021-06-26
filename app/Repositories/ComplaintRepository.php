@@ -14,7 +14,7 @@ class ComplaintRepository extends Complaint
             ->join('business', 'complaints.busine_id', '=', 'business.id')
             ->join('countries', 'complaints.country_id', '=', 'countries.id')
             ->join('categories', 'business.category_id', '=', 'categories.id');
-        $query->select('complaints.*', 'users.firstname', 'users.lastname', 'users.email', 'users.avatar', 'business.name AS busine_name', 'business.logo AS logo', 'business.slug AS busine_slug', 'countries.name AS country_name');
+        $query->select('complaints.*', 'users.firstname', 'users.lastname', 'users.email', 'users.avatar', 'business.name AS busine_name', 'business.logo AS logo', 'business.slug AS busine_slug', 'business.number_of_visit', 'business.id AS business_id', 'countries.name AS country_name');
 
 
         if (isset($filter) and !empty($filter['search'])) {
@@ -76,9 +76,20 @@ class ComplaintRepository extends Complaint
             $query->where('business.category_id', '=', $filter['category_id']);
         }
 
+        if (isset($filter['search_busine'])) {
+            $query->where('business.name', 'LIKE', '%'.$filter['search_busine'].'%');
+        }
+
         $query->groupBy('business.id');
 
         return $query;
+    }
+
+    public static function totalComment($id)
+    {
+        $complaintstotal = Complaint::where('busine_id', '=', $id)->count('busine_id');
+
+        return $complaintstotal;
     }
 
 }

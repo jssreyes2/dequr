@@ -22,7 +22,7 @@ class BusinesRepository extends Busines
 
         if (isset($filter) and !empty($filter['status'])) {
 
-            $query->where('business.status', '=',  $filter['status']);
+            $query->where('business.status', '=', $filter['status']);
         }
 
         if (isset($filter) and !empty($filter['slug'])) {
@@ -34,4 +34,5 @@ class BusinesRepository extends Busines
 
         return $query;
     }
+
 }

@@ -16,8 +16,8 @@
             @endif
 
             <div class="form-search">
-                <form action="#" method="POST">
-                    <input type="text" placeholder="Buscar por nombre">
+                <form action="?" method="GET">
+                    <input type="text" id="search_busine" name="search_busine" placeholder="Buscar por nombre" value="{{isset($searchBusine) ? $searchBusine : ''}}">
                     <button type="submit"></button>
                 </form>
             </div>
@@ -31,7 +31,7 @@
                             @if(!empty($item->logo))
                                 <img src="{{ asset('storage/photo_busines/' .$item->logo)}}" alt="{{ucwords(mb_strtolower($item->name))}}">
                             @else
-                                <img src="{{ asset('asset/frontend/assets/img/avatar-busines.jpg')}}" alt="{{ucwords(mb_strtolower($item->name))}}">
+                                <img src="{{ asset('asset/frontend/assets/img/avatar-busines.png')}}" alt="{{ucwords(mb_strtolower($item->name))}}">
                             @endif
 
                         </div>
@@ -67,94 +67,42 @@
 
 
             <div class="others-business">
-                <div class="item-box">
-                    <h2 class="title">Fuego de Vida España</h2>
-                    <div class="right">
-                        <div class="statistics">
-                            <div class="rating">
-                                <div class="stars">
-                                    <span class="star-completed"></span>
-                                    <span class="star-completed"></span>
-                                    <span class="star-completed"></span>
-                                    <span class="star-completed"></span>
-                                    <span class="star-empty"></span>
+
+
+                @if(count($recentBusiness) > 0)
+
+                    @foreach($recentBusiness AS $item)
+                        <div class="item-box">
+                            <h2 class="title">{{ucwords(mb_strtolower($item->name))}}</h2>
+                            <div class="right">
+                                <div class="statistics">
+                                    <div class="rating">
+                                        <div class="stars">
+                                            <span class="star-completed"></span>
+                                            <span class="star-completed"></span>
+                                            <span class="star-completed"></span>
+                                            <span class="star-completed"></span>
+                                            <span class="star-empty"></span>
+                                        </div>
+                                        <div class="percentage">4.0%</div>
+                                    </div>
+                                    <div class="opinions">Opiniones
+                                        @if($item->total_business < 10)
+                                            {{'0'.$item->total_business}}
+                                        @else
+                                            {{$item->total_business}}
+                                        @endif
+                                    </div>
                                 </div>
-                                <div class="percentage">4.0%</div>
-                            </div>
-                            <div class="opinions">Opiniones 150</div>
-                        </div>
-                        <div class="buttons">
-                            <a href="empresa.php" class="btn-see">Ver empresa</a>
-                            <a href="publica-tu-queja.php" class="btn-add-opinion">Agregar tu opinión</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="item-box">
-                    <h2 class="title">Fuego de Vida España</h2>
-                    <div class="right">
-                        <div class="statistics">
-                            <div class="rating">
-                                <div class="stars">
-                                    <span class="star-completed"></span>
-                                    <span class="star-completed"></span>
-                                    <span class="star-completed"></span>
-                                    <span class="star-completed"></span>
-                                    <span class="star-empty"></span>
+                                <div class="buttons">
+                                    <a href="{{url('company/'.$item->slug)}}" class="btn-see">Ver empresa</a>
+                                    <a href="{{route('post_complaint.index')}}" class="btn-add-opinion">Agregar tu opinión</a>
                                 </div>
-                                <div class="percentage">4.0%</div>
                             </div>
-                            <div class="opinions">Opiniones 150</div>
                         </div>
-                        <div class="buttons">
-                            <a href="empresa.php" class="btn-see">Ver empresa</a>
-                            <a href="publica-tu-queja.php" class="btn-add-opinion">Agregar tu opinión</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="item-box">
-                    <h2 class="title">Fuego de Vida España</h2>
-                    <div class="right">
-                        <div class="statistics">
-                            <div class="rating">
-                                <div class="stars">
-                                    <span class="star-completed"></span>
-                                    <span class="star-completed"></span>
-                                    <span class="star-completed"></span>
-                                    <span class="star-completed"></span>
-                                    <span class="star-empty"></span>
-                                </div>
-                                <div class="percentage">4.0%</div>
-                            </div>
-                            <div class="opinions">Opiniones 150</div>
-                        </div>
-                        <div class="buttons">
-                            <a href="empresa.php" class="btn-see">Ver empresa</a>
-                            <a href="publica-tu-queja.php" class="btn-add-opinion">Agregar tu opinión</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="item-box">
-                    <h2 class="title">Fuego de Vida España</h2>
-                    <div class="right">
-                        <div class="statistics">
-                            <div class="rating">
-                                <div class="stars">
-                                    <span class="star-completed"></span>
-                                    <span class="star-completed"></span>
-                                    <span class="star-completed"></span>
-                                    <span class="star-completed"></span>
-                                    <span class="star-empty"></span>
-                                </div>
-                                <div class="percentage">4.0%</div>
-                            </div>
-                            <div class="opinions">Opiniones 150</div>
-                        </div>
-                        <div class="buttons">
-                            <a href="empresa.php" class="btn-see">Ver empresa</a>
-                            <a href="publica-tu-queja.php" class="btn-add-opinion">Agregar tu opinión</a>
-                        </div>
-                    </div>
-                </div>
+                    @endforeach
+
+                @endif
             </div>
         </div>
     </main>
