@@ -41,7 +41,7 @@ class Comment extends Model
         $obj->complaint_id =$request->id;
         $obj->user_id =$userId;
         $obj->comment = $request->comment;
-        $obj->status = Comment::STATUS_INACTIVE;
+        $obj->status = Comment::STATUS_ACTIVE;
         $obj->save();
         return $obj;
     }

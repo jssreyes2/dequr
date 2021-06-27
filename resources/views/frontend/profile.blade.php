@@ -12,17 +12,19 @@
                 <div class="left">
                     <div class="wrap-image">
 
-                        <div class="image">
 
-                            @if(isset($user) and !empty($user->avatar))
+                        @if(isset($user) and !empty($user->avatar))
+                            <div class="image">
                                 <img src="{{ asset('storage/photo_users/' .$user->avatar)}}" alt="imagen de perfil" id="imgPreview">
-                            @else
-                                <img src="{{ asset('asset/frontend/assets/img/robot-dequr.svg')}}" alt="imagen de perfil" id="imgPreview">
-                                <span class="name">GQ</span>
-                            @endif
+                            </div>
+                        @else
+                            <div style="border-radius: 50%;padding: 2px;border: 1px solid #ccc;">
+                                <img src="{{ asset('asset/frontend/assets/img/avatar-user.png')}}" alt="imagen de perfil" id="imgPreview" style="border-radius: 50%;">
+                            </div>
+                        @endif
 
-                        </div>
-                        <label class="upload">
+
+                        <label class="upload" style="padding: 7px;">
                             <input type="file" id="avatar" name="avatar" accept="image/x-png,image/gif,image/jpeg">
                         </label>
                     </div>
@@ -304,7 +306,7 @@
         $(".btn-close-account").click(function () {
 
             $('#loading-close-account').show();
-            $.post( "{{route('profile.closeAccount')}}");
+            $.post("{{route('profile.closeAccount')}}");
         });
 
     </script>

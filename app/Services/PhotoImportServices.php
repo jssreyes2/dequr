@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Busines;
 use App\Models\Complaint;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Intervention\Image\Facades\Image;
@@ -167,5 +168,18 @@ class PhotoImportServices
 
 
     }
+
+
+    public function fileCopyAvatar(User $user){
+
+        $urlFolderUser = storage_path('app' . DIRECTORY_SEPARATOR . 'public' . DIRECTORY_SEPARATOR . 'photo_users'.DIRECTORY_SEPARATOR);
+
+        File::copy(asset('asset/frontend/assets/img/avatar-user.png'), $urlFolderUser.'avatar-user-'.$user->id.'.png');
+
+        $user->avatar = 'avatar-user-'.$user->id.'.png';
+        $user->save();
+    }
+
+
 
 }

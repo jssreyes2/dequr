@@ -62,7 +62,7 @@
                 });
 
                 $('#loading').show();
-                $('.btn-register').attr('disabled', true);
+                // $('.btn-register').attr('disabled', true);
 
                 var formData = new FormData(document.getElementById("form_register"));
 

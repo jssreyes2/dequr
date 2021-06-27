@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
+use App\Services\PhotoImportServices;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Auth;
@@ -88,6 +89,11 @@ class RegisterController extends Controller
         $request->merge(['rol_id' => User::ROL_USERNAME, 'user_status' => true]);
 
         $user=User::saveUser($request);
+
+
+        $photoServices = new PhotoImportServices();
+        $photoServices->fileCopyAvatar($user);
+
          Auth::loginUsingId($user->id);
 
         return response()->json(['status' => 'success', 'alert' => env('MSJ_SUCCESS')]);

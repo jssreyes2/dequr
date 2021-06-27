@@ -1,19 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4757b251-c766-44d7-bef7-3c6e447f5743" name="Default Changelist" comment="avances ultimos cambios">
+    <list default="true" id="4757b251-c766-44d7-bef7-3c6e447f5743" name="Default Changelist" comment="avances ultimos cambios para subir a vivo">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Frontend/NotificationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Frontend/NotificationController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Frontend/ProfileController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Frontend/ProfileController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/VerifyCsrfToken.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/VerifyCsrfToken.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Repositories/CommentRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Repositories/CommentRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/database.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/database.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/auth/login.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/login.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Comment.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Comment.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Services/PhotoImportServices.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Services/PhotoImportServices.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/auth/register.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/register.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/frontend/complaints.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/complaints.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/frontend/notifications.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/notifications.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/frontend/profile.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/profile.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/frontend.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/frontend.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -199,7 +193,8 @@
       <workItem from="1624626486714" duration="95000" />
       <workItem from="1624637472734" duration="597000" />
       <workItem from="1624656597503" duration="119000" />
-      <workItem from="1624706408323" duration="11843000" />
+      <workItem from="1624706408323" duration="12519000" />
+      <workItem from="1624796836686" duration="5427000" />
     </task>
     <task id="LOCAL-00001" summary="avances mostrar datos quejas en el fronend">
       <created>1623451037094</created>
@@ -222,7 +217,14 @@
       <option name="project" value="LOCAL" />
       <updated>1624712103928</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="avances ultimos cambios para subir a vivo">
+      <created>1624719659053</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1624719659053</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -244,7 +246,8 @@
     <MESSAGE value="avances mostrar datos quejas en el fronend" />
     <MESSAGE value="avances perfil, quejas, empresa, comentarios" />
     <MESSAGE value="avances ultimos cambios" />
-    <option name="LAST_COMMIT_MESSAGE" value="avances ultimos cambios" />
+    <MESSAGE value="avances ultimos cambios para subir a vivo" />
+    <option name="LAST_COMMIT_MESSAGE" value="avances ultimos cambios para subir a vivo" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
