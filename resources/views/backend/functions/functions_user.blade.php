@@ -76,7 +76,6 @@
     function deleteData() {
 
         var id = $('#id_eliminar').val();
-        var rutaController = "{{ route('destroyUser') }}";
 
         $.ajaxSetup({
             headers: {
@@ -86,18 +85,20 @@
 
         $.ajax({
             type: "POST",
-            url: rutaController,
+            url: "{{ route('destroyUser') }}",
             cache: false,
             dataType: 'json',
             data: {id: id},
             success: function (respuesta) {
-                if (respuesta.exito == 1) {
-                    $('#contenidomodal').hide();
-                    $('#modal-danger').modal('hide');
-                    Cancel();
-                }
-                if (respuesta.error == 1) {
-                    MensajeForm('error_sql');
+
+                showAlert(respuesta.alert, respuesta.status);
+
+                if (respuesta.status=='success') {
+
+                    setTimeout(function () {
+                        refresh();
+                    }, 2000);
+
                 }
             }
         });

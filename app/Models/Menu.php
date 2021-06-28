@@ -146,6 +146,7 @@ class Menu extends Model
         $obj = new self();
 
         $deteleMenu=$obj->find($id);
+
         $obj->find($id)->delete();
 
         #Guardamos en Activity Log

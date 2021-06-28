@@ -140,7 +140,7 @@ class UserController extends Controller
             return response()->json(['status' => 'success', 'alert' => env('MSJ_SUCCESS_DELETE')]);
         }
 
-        return response()->json(['status' => 'success', 'alert' => env('MSJ_FAIL_DELETE')]);
+        return response()->json(['status' => 'fail', 'alert' => env('MSJ_FAIL_DELETE')]);
 
 
     }

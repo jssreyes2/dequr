@@ -105,7 +105,6 @@
     function deleteData() {
 
         var id = $('#id_eliminar').val();
-        var rutaController = "{{ route('destroyMenu') }}";
 
         $.ajaxSetup({
             headers: {
@@ -115,19 +114,22 @@
 
         $.ajax({
             type: "POST",
-            url: rutaController,
+            url: "{{ route('destroyMenu') }}",
             cache: false,
             dataType: 'json',
             data: {id: id},
             success: function (respuesta) {
-                if (respuesta.exito == 1) {
-                    $('#contenidomodal').hide();
-                    $('#modal-danger').modal('hide');
-                    refresh();
+
+                showAlert(respuesta.alert, respuesta.status);
+
+                if (respuesta.status=='success') {
+
+                    setTimeout(function () {
+                        refresh();
+                    }, 2000);
+
                 }
-                if (respuesta.error == 1) {
-                    MensajeForm('error_sql');
-                }
+
             }
         });
     }

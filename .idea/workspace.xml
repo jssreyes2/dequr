@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4757b251-c766-44d7-bef7-3c6e447f5743" name="Default Changelist" comment="avances ultimos cambios para subir a vivo">
+    <list default="true" id="4757b251-c766-44d7-bef7-3c6e447f5743" name="Default Changelist" comment="ajuste perfil avatar">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Comment.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Comment.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Services/PhotoImportServices.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Services/PhotoImportServices.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/auth/register.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/register.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/frontend/profile.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/profile.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Backend/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Backend/UserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Menu.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Menu.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/backend/functions/functions_menu.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend/functions/functions_menu.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/backend/functions/functions_user.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend/functions/functions_user.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/backend/layouts/menu.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend/layouts/menu.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -194,7 +194,9 @@
       <workItem from="1624637472734" duration="597000" />
       <workItem from="1624656597503" duration="119000" />
       <workItem from="1624706408323" duration="12519000" />
-      <workItem from="1624796836686" duration="5427000" />
+      <workItem from="1624796836686" duration="6398000" />
+      <workItem from="1624814925996" duration="1235000" />
+      <workItem from="1624893387365" duration="947000" />
     </task>
     <task id="LOCAL-00001" summary="avances mostrar datos quejas en el fronend">
       <created>1623451037094</created>
@@ -224,7 +226,14 @@
       <option name="project" value="LOCAL" />
       <updated>1624719659053</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="ajuste perfil avatar">
+      <created>1624811064870</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1624811064870</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -247,7 +256,8 @@
     <MESSAGE value="avances perfil, quejas, empresa, comentarios" />
     <MESSAGE value="avances ultimos cambios" />
     <MESSAGE value="avances ultimos cambios para subir a vivo" />
-    <option name="LAST_COMMIT_MESSAGE" value="avances ultimos cambios para subir a vivo" />
+    <MESSAGE value="ajuste perfil avatar" />
+    <option name="LAST_COMMIT_MESSAGE" value="ajuste perfil avatar" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
