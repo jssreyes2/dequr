@@ -9,6 +9,37 @@
             </div>
             <div class="modal-body">
                 <p>{{$complaints->description}}</p>
+
+                <hr>
+                <h3>Comentarios</h3>
+
+                @if(count($commentComplaints)> 0)
+                    @foreach($commentComplaints as $item)
+
+                        @php
+                            $date=\Carbon\Carbon::parse($item->created_at);
+                        @endphp
+
+
+                        <p>
+                            @if(!empty($complaint->avatar))
+                                <img src="{{ asset('storage/photo_users/' .$item->avatar)}}"
+                                     alt="{{ucwords(mb_strtolower($item->firstname.' '.$item->lastname))}}" id="imgPreview" class="avatar" style="width:30px;">
+                            @else
+                                <img src="{{ asset('asset/frontend/assets/img/avatar-user.png')}}" alt="dequr" id="imgPreview" class="avatar" style="width:30px;">
+                            @endif
+
+                            <strong>
+                                {{(($item->firstname) ? ' @'.ucwords(mb_strtolower($item->firstname.' '.$item->lastname)):' @ Anónimo')}}
+                            </strong> -
+                                {{$date->toFormattedDateString ()}}
+                            <br>
+                            <br>
+                           <span style="color:#999">{{ucfirst(mb_strtolower($item->comment))}}</span>
+                        </p>
+                    @endforeach
+                @endif
+
             </div>
             <div class="modal-footer justify-content-between">
                 <button type="button" class="btn btn-outline-light" data-dismiss="modal">Cerrar</button>

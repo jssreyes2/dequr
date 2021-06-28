@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Busines;
 use App\Models\Country;
 use App\Repositories\BusinesRepository;
+use App\Repositories\CommentRepository;
 use App\Repositories\ComplaintRepository;
 use App\Services\PhotoImportServices;
 use Illuminate\Http\Request;
@@ -48,8 +49,11 @@ class ReportComplaintController extends Controller
 
         $complaints = ComplaintRepository::getComplaint($filter)->first();
 
+        $commentComplaints = CommentRepository::getComments(['complaint_id' => $request->get('id')])->get();
+
         return view('backend.reports.modal_description_complaint', [
             'complaints' => $complaints,
+            'commentComplaints' => $commentComplaints,
         ]);
     }
 
