@@ -69,7 +69,7 @@
                                         <img src="{{ asset('storage/photo_users/' .$item->avatar)}}"
                                              alt="{{ucwords(mb_strtolower($item->firstname.' '.$item->lastname))}}" id="imgPreview" class="avatar">
                                     @else
-                                        <img src="{{ asset('asset/frontend/assets/img/robot-dequr.svg')}}" alt="dequr" id="imgPreview" class="avatar">
+                                        <img src="{{ asset('asset/frontend/assets/img/avatar-user.png')}}" alt="dequr" id="imgPreview" class="avatar">
                                     @endif
 
                                 </div>

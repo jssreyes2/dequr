@@ -9,7 +9,7 @@
                 <a href="{{route('post_complaint.index')}}" class="btn-primary">Publica tu queja</a>
             </div>
             <div class="wrap-image">
-                <img src="{{ asset('asset/frontend/assets/img/robot-dequr.svg')}}" alt="Dequr">
+                <img src="{{ asset('asset/frontend/assets/img/avatar-user.png')}}" alt="Dequr">
             </div>
         </div>
     </div>

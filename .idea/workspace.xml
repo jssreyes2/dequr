@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4757b251-c766-44d7-bef7-3c6e447f5743" name="Default Changelist" comment="ajuste perfil avatar">
+    <list default="true" id="4757b251-c766-44d7-bef7-3c6e447f5743" name="Default Changelist" comment="ajuste editar user">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Backend/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Backend/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Menu.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Menu.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend/functions/functions_menu.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend/functions/functions_menu.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend/functions/functions_user.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend/functions/functions_user.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend/layouts/menu.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend/layouts/menu.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/backend/reports/table_complaint.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend/reports/table_complaint.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/frontend/company.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/company.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/frontend/complaints.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/complaints.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/frontend/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/index.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -196,7 +196,7 @@
       <workItem from="1624706408323" duration="12519000" />
       <workItem from="1624796836686" duration="6398000" />
       <workItem from="1624814925996" duration="1235000" />
-      <workItem from="1624893387365" duration="947000" />
+      <workItem from="1624893387365" duration="3237000" />
     </task>
     <task id="LOCAL-00001" summary="avances mostrar datos quejas en el fronend">
       <created>1623451037094</created>
@@ -233,7 +233,14 @@
       <option name="project" value="LOCAL" />
       <updated>1624811064870</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="ajuste editar user">
+      <created>1624894571032</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1624894571032</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -257,7 +264,8 @@
     <MESSAGE value="avances ultimos cambios" />
     <MESSAGE value="avances ultimos cambios para subir a vivo" />
     <MESSAGE value="ajuste perfil avatar" />
-    <option name="LAST_COMMIT_MESSAGE" value="ajuste perfil avatar" />
+    <MESSAGE value="ajuste editar user" />
+    <option name="LAST_COMMIT_MESSAGE" value="ajuste editar user" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

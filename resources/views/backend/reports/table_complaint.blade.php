@@ -183,7 +183,7 @@
                                         @endforeach()
                                     @else
                                         <tr>
-                                            <td colspan="8">
+                                            <td colspan="9">
                                                 @foreach ($errors->all() as $error)
                                                     <div class="alert alert-info alert-dismissible">
                                                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>

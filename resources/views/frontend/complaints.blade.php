@@ -24,7 +24,7 @@
                                 <img src="{{ asset('storage/photo_users/' .$complaint->avatar)}}"
                                      alt="{{ucwords(mb_strtolower($complaint->firstname.' '.$complaint->lastname))}}" id="imgPreview" class="avatar">
                             @else
-                                <img src="{{ asset('asset/frontend/assets/img/robot-dequr.svg')}}" alt="dequr" id="imgPreview" class="avatar">
+                                <img src="{{ asset('asset/frontend/assets/img/avatar-user.png')}}" alt="dequr" id="imgPreview" class="avatar">
                             @endif
 
                         </div>
