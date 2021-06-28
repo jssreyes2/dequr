@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4757b251-c766-44d7-bef7-3c6e447f5743" name="Default Changelist" comment="ajuste editar user">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend/reports/table_complaint.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend/reports/table_complaint.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/frontend/company.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/company.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/frontend/complaints.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/complaints.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/frontend/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/index.blade.php" afterDir="false" />
-    </list>
+    <list default="true" id="4757b251-c766-44d7-bef7-3c6e447f5743" name="Default Changelist" comment="ajuste avatar user" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -196,7 +189,7 @@
       <workItem from="1624706408323" duration="12519000" />
       <workItem from="1624796836686" duration="6398000" />
       <workItem from="1624814925996" duration="1235000" />
-      <workItem from="1624893387365" duration="3237000" />
+      <workItem from="1624893387365" duration="3301000" />
     </task>
     <task id="LOCAL-00001" summary="avances mostrar datos quejas en el fronend">
       <created>1623451037094</created>
@@ -240,7 +233,14 @@
       <option name="project" value="LOCAL" />
       <updated>1624894571032</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="ajuste avatar user">
+      <created>1624896676375</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1624896676375</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -265,7 +265,8 @@
     <MESSAGE value="avances ultimos cambios para subir a vivo" />
     <MESSAGE value="ajuste perfil avatar" />
     <MESSAGE value="ajuste editar user" />
-    <option name="LAST_COMMIT_MESSAGE" value="ajuste editar user" />
+    <MESSAGE value="ajuste avatar user" />
+    <option name="LAST_COMMIT_MESSAGE" value="ajuste avatar user" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
