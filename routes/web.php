@@ -20,3 +20,4 @@ include('backend/configuration.php');
 include('backend/records.php');
 include('backend/landing_page.php');
 include('backend/reports.php');
+include('backend/utilities.php');

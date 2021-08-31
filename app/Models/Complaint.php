@@ -32,6 +32,7 @@ class Complaint extends Model
         $slug = str_slug($request->title, '-');
         $obj->user_id = Auth::user()->id;
         $obj->busine_id = $request->busine_id;
+        $obj->category_id = $request->category_id;
         $obj->title =  ucwords(mb_strtolower($request->title));
         $obj->description = $request->description;
         $obj->country_id = $request->country_id;

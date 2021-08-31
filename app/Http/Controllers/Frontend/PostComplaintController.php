@@ -32,7 +32,12 @@ class PostComplaintController extends Controller
             return response()->json(['status' => 'fail', 'session' => true]);
         }
 
-        $busine = $request->busine_id;
+        $busine=null;
+        if($request->busine){
+            $busine = $request->busine;
+        }else{
+            $busine = $request->busine_id;
+        }
 
         if(empty($busine)){
             return response()->json(['status' => 'fail', 'message' => 'Seleccione o introduzca la empresas']);

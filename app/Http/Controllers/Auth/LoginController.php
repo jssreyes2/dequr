@@ -53,7 +53,6 @@ class LoginController extends Controller
         if ($this->attemptLogin($request)) {
 
             $this->incrementLoginAttempts($request);
-            session(['user_admin_id' => Auth::user()->id, 'email' => $request->input('email'), 'password' => bcrypt($request->password)]);
 
             if (Auth::user()->rol_id==1 || Auth::user()->rol_id==2) { //ANDMINISTRADOR O OPERADOR
                 return response()->json(['status' => 'success', 'backend' => true]);
@@ -62,6 +61,7 @@ class LoginController extends Controller
             }
 
         }
+
 
         if ($request->loginFront) {
             return response()->json(['status' => 'fail', 'message' => 'Alerta, los datos son incorrectos']);
